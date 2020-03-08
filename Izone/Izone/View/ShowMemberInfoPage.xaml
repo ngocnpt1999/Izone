@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Izone.View.ShowMemberInfoPage">
+    <ScrollView>
+        <StackLayout>
+            <CarouselView ItemsSource="{Binding ImagesUri}"
+                          x:Name="carouselView">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding .}"
+                               Aspect="AspectFit"/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <StackLayout Padding="10">
+                <Label Text="{Binding FullName, StringFormat='Tên thật: {0}'}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding NickName, StringFormat='Nghệ danh: {0}'}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Role, StringFormat='Vai trò: {0}'}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding DateOfBirth, StringFormat='Sinh nhật: {0}'}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Height, StringFormat='Chiều cao: {0}'}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Weight, StringFormat='Cân nặng: {0}'}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding BloodType, StringFormat='Nhóm máu: {0}'}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
