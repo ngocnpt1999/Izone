@@ -12,10 +12,10 @@ namespace Izone.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListSingleInAlbumPage : ContentPage
     {
-        public ListSingleInAlbumPage(int id)
+        public ListSingleInAlbumPage(Model.Album album)
         {
             InitializeComponent();
-            BindingContext = ViewModel.AlbumsManagerViewModel.Instance.Albums.Where(x => x.ID == id).FirstOrDefault();
+            BindingContext = album;
             refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
         }
 
@@ -30,7 +30,9 @@ namespace Izone.View
             var single = ((ListView)sender).SelectedItem as Model.Single;
             if (single != null)
             {
-                await Navigation.PushAsync(new MediaPage(single.Mp3Uri));
+                Model.Album album = BindingContext as Model.Album;
+                int index = album.Singles.IndexOf(single);
+                await Navigation.PushAsync(new MediaPage(album, index));
                 ((ListView)sender).SelectedItem = null;
             }
         }

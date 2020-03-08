@@ -12,10 +12,32 @@ namespace Izone.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MediaPage : ContentPage
     {
-        public MediaPage(string uri)
+        private Model.Album album;
+        private int indexOfSingle;
+
+        public MediaPage(Model.Album album, int index)
         {
             InitializeComponent();
-            mediaView.Source = MediaSource.FromUri(new Uri(uri));
+            this.album = album;
+            indexOfSingle = index;
+            BindingContext = this.album.Singles[indexOfSingle];
+            refreshView.IsRefreshing = true;
+        }
+
+        private void mediaView_MediaOpened(object sender, EventArgs e)
+        {
+            refreshView.IsRefreshing = false;
+        }
+
+        private void mediaView_MediaEnded(object sender, EventArgs e)
+        {
+            int count = this.album.Singles.Count;
+            if (indexOfSingle < count - 1)
+            {
+                indexOfSingle++;
+                BindingContext = this.album.Singles[indexOfSingle];
+                refreshView.IsRefreshing = true;
+            }
         }
     }
 }

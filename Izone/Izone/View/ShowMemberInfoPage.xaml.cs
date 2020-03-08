@@ -12,10 +12,10 @@ namespace Izone.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShowMemberInfoPage : ContentPage
     {
-        public ShowMemberInfoPage(int id)
+        public ShowMemberInfoPage(Model.Member member)
         {
             InitializeComponent();
-            BindingContext = ViewModel.MembersManagerViewModel.Instance.Members.Where(x => x.ID == id).FirstOrDefault();
+            BindingContext = member;
             int countImages = (BindingContext as Model.Member).ImagesUri.Count;
             Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>
             {

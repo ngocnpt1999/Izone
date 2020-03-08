@@ -5,7 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Izone.View.MediaPage">
-    <MediaElement x:Name="mediaView"
-                  AutoPlay="True"
-                  ShowsPlaybackControls="True"/>
+    <RefreshView x:Name="refreshView">
+        <MediaElement x:Name="mediaView"
+                      Source="{Binding Mp3Uri}"
+                      AutoPlay="True"
+                      ShowsPlaybackControls="True"
+                      MediaOpened="mediaView_MediaOpened"
+                      MediaEnded="mediaView_MediaEnded"/>
+    </RefreshView>
 </ContentPage>
