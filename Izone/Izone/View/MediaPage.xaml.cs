@@ -39,5 +39,41 @@ namespace Izone.View
                 refreshView.IsRefreshing = true;
             }
         }
+
+        private void mediaView_MediaFailed(object sender, EventArgs e)
+        {
+            refreshView.IsRefreshing = false;
+        }
+
+        private void btnPrevious_Clicked(object sender, EventArgs e)
+        {
+            if (indexOfSingle > 0)
+            {
+                indexOfSingle--;
+                BindingContext = this.album.Singles[indexOfSingle];
+            }
+            else
+            {
+                indexOfSingle = this.album.Singles.Count - 1;
+                BindingContext = this.album.Singles[indexOfSingle];
+            }
+            refreshView.IsRefreshing = true;
+        }
+
+        private void btnNext_Clicked(object sender, EventArgs e)
+        {
+            int count = this.album.Singles.Count;
+            if (indexOfSingle < count - 1)
+            {
+                indexOfSingle++;
+                BindingContext = this.album.Singles[indexOfSingle];
+            }
+            else
+            {
+                indexOfSingle = 0;
+                BindingContext = this.album.Singles[indexOfSingle];
+            }
+            refreshView.IsRefreshing = true;
+        }
     }
 }

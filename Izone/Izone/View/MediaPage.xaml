@@ -6,11 +6,29 @@
              mc:Ignorable="d"
              x:Class="Izone.View.MediaPage">
     <RefreshView x:Name="refreshView">
-        <MediaElement x:Name="mediaView"
-                      Source="{Binding Mp3Uri}"
-                      AutoPlay="True"
-                      ShowsPlaybackControls="True"
-                      MediaOpened="mediaView_MediaOpened"
-                      MediaEnded="mediaView_MediaEnded"/>
+        <StackLayout>
+            <MediaElement x:Name="mediaView"
+                          Source="{Binding Mp3Uri}"
+                          AutoPlay="True"
+                          ShowsPlaybackControls="True"
+                          MediaOpened="mediaView_MediaOpened"
+                          MediaEnded="mediaView_MediaEnded"
+                          MediaFailed="mediaView_MediaFailed"
+                          VerticalOptions="FillAndExpand"/>
+            <StackLayout Orientation="Horizontal"
+                         Padding="8">
+                <Button Text="Previous"
+                        HorizontalOptions="StartAndExpand"
+                        x:Name="btnPrevious"
+                        Clicked="btnPrevious_Clicked"/>
+                <Label Text="{Binding Name}"
+                       HorizontalOptions="CenterAndExpand"
+                       FontAttributes="Bold"/>
+                <Button Text="Next"
+                        HorizontalOptions="EndAndExpand"
+                        x:Name="btnNext"
+                        Clicked="btnNext_Clicked"/>
+            </StackLayout>
+        </StackLayout>
     </RefreshView>
 </ContentPage>

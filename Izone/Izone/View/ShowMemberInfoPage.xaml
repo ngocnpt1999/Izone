@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Izone.View.ShowMemberInfoPage">
+             x:Class="Izone.View.ShowMemberInfoPage"
+             Title="Profile">
     <ScrollView>
         <StackLayout>
             <CarouselView ItemsSource="{Binding ImagesUri}"

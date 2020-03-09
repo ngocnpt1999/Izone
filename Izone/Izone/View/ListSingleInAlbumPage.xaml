@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Izone.View.ListSingleInAlbumPage">
+             x:Class="Izone.View.ListSingleInAlbumPage"
+             Title="{Binding Name}">
     <RefreshView x:Name="refreshView">
         <ListView ItemsSource="{Binding Singles}"
                   ItemSelected="ListView_ItemSelected">
