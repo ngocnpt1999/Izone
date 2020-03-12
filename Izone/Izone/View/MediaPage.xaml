@@ -8,7 +8,6 @@
     <RefreshView x:Name="refreshView">
         <StackLayout>
             <MediaElement x:Name="mediaView"
-                          Source="{Binding Mp3Uri}"
                           AutoPlay="True"
                           ShowsPlaybackControls="True"
                           MediaOpened="mediaView_MediaOpened"
@@ -21,9 +20,13 @@
                         HorizontalOptions="StartAndExpand"
                         x:Name="btnPrevious"
                         Clicked="btnPrevious_Clicked"/>
-                <Label Text="{Binding Name}"
-                       HorizontalOptions="CenterAndExpand"
-                       FontAttributes="Bold"/>
+                <Picker Title="Select a single"
+                        x:Name="pickerSingle"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        ItemsSource="{Binding Singles}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="pickerSingle_SelectedIndexChanged"/>
                 <Button Text="Next"
                         HorizontalOptions="EndAndExpand"
                         x:Name="btnNext"
