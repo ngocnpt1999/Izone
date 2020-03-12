@@ -10,7 +10,7 @@ namespace Izone
         {
             InitializeComponent();
 
-            Device.SetFlags(new string[] { "MediaElement_Experimental" });
+            Device.SetFlags(new string[] { "MediaElement_Experimental", "CarouselView_Experimental", "IndicatorView_Experimental" });
 
             ViewModel.MembersManagerViewModel membersManager = ViewModel.MembersManagerViewModel.Instance;
             ViewModel.AlbumsManagerViewModel albumsManager = ViewModel.AlbumsManagerViewModel.Instance;

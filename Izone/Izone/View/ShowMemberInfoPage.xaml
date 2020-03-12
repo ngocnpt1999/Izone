@@ -9,7 +9,8 @@
     <ScrollView>
         <StackLayout>
             <CarouselView ItemsSource="{Binding ImagesUri}"
-                          x:Name="carouselView">
+                          x:Name="carouselView"
+                          IndicatorView="indicatorView">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding .}"
@@ -17,6 +18,10 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
+            <IndicatorView x:Name="indicatorView"
+                           HorizontalOptions="Center"
+                           IndicatorColor="LightGray"
+                           SelectedIndicatorColor="DarkGray"/>
             <StackLayout Padding="10">
                 <Label Text="{Binding FullName, StringFormat='Tên thật: {0}'}"
                        FontSize="Medium"
