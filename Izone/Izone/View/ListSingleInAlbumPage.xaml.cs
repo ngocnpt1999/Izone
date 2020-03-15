@@ -16,6 +16,7 @@ namespace Izone.View
         {
             InitializeComponent();
             BindingContext = album;
+            searchSingle.Album = album;
             refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
         }
 

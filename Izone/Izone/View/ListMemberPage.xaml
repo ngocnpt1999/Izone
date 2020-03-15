@@ -10,9 +10,17 @@
     <Shell.SearchHandler>
         <control:SearchMemberHandler Placeholder="..."
                                      x:Name="searchControl"
-                                     ShowsResults="True"
-                                     DisplayMemberName="NickName"
-                                     FontSize="Medium"/>
+                                     ShowsResults="True">
+            <control:SearchMemberHandler.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="8">
+                        <Label Text="{Binding NickName}"
+                               FontSize="Medium"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                </DataTemplate>
+            </control:SearchMemberHandler.ItemTemplate>
+        </control:SearchMemberHandler>
     </Shell.SearchHandler>
     <RefreshView IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding RefreshListCommand}">
