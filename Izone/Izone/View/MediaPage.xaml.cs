@@ -63,6 +63,10 @@ namespace Izone.View
 
         private void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (pickerSingle.SelectedIndex < 0)
+            {
+                return;
+            }
             var album = (Model.Album)BindingContext;
             var uri = new Uri(album.Singles[pickerSingle.SelectedIndex].Mp3Uri);
             mediaView.Source = MediaSource.FromUri(uri);

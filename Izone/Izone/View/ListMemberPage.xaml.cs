@@ -17,6 +17,7 @@ namespace Izone.View
         {
             InitializeComponent();
             BindingContext = ViewModel.MembersManagerViewModel.Instance;
+            searchControl.Members = ViewModel.MembersManagerViewModel.Instance.Members;
         }
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

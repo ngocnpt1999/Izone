@@ -3,9 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:Izone.Control"
              mc:Ignorable="d"
              x:Class="Izone.View.ListMemberPage"
              Title="Danh sách thành viên">
+    <Shell.SearchHandler>
+        <control:SearchMemberHandler Placeholder="..."
+                                     x:Name="searchControl"
+                                     ShowsResults="True"
+                                     DisplayMemberName="NickName"
+                                     FontSize="Medium"/>
+    </Shell.SearchHandler>
     <RefreshView IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding RefreshListCommand}">
         <CollectionView ItemsSource="{Binding Members}"

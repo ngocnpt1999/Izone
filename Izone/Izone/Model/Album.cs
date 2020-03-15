@@ -14,7 +14,7 @@ namespace Izone.Model
         private int id;
         private string name;
         private string imageUri;
-        private ObservableCollection<Single> singles;
+        private ObservableCollection<Single> singles = new ObservableCollection<Single>();
 
         public int ID
         {
@@ -46,7 +46,7 @@ namespace Izone.Model
         public ObservableCollection<Single> Singles
         {
             get => singles;
-            set
+            private set
             {
                 singles = value;
                 OnPropertyChanged("Singles");

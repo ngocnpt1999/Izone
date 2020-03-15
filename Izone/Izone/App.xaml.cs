@@ -20,6 +20,7 @@ namespace Izone
 
         protected override void OnStart()
         {
+            Routing.RegisterRoute("memberprofile", typeof(View.ShowMemberInfoPage));
         }
 
         protected override void OnSleep()
