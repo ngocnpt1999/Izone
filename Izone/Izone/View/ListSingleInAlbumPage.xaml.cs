@@ -10,14 +10,39 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    [QueryProperty("ID", "id")]
     public partial class ListSingleInAlbumPage : ContentPage
     {
+        private string id;
+        public string ID
+        {
+            get => id;
+            set => id = Uri.UnescapeDataString(value);
+        }
+
+        public ListSingleInAlbumPage()
+        {
+            InitializeComponent();
+        }
+
         public ListSingleInAlbumPage(Model.Album album)
         {
             InitializeComponent();
             BindingContext = album;
             searchSingle.Album = album;
             refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (this.id != null)
+            {
+                var album = ViewModel.AlbumsManagerViewModel.Instance.Albums.Where(x => x.ID == int.Parse(this.id)).FirstOrDefault();
+                BindingContext = album;
+                searchSingle.Album = album;
+                refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
+            }
         }
 
         private void ExcuteRefreshListSingleCommand()

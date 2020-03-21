@@ -3,9 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:Izone.Control"
              mc:Ignorable="d"
              x:Class="Izone.View.ListAlbumPage"
              Title="Danh sách album">
+    <Shell.SearchHandler>
+        <control:SearchAlbumHandler Placeholder="..."
+                                    ShowsResults="True"
+                                    x:Name="searchAlbum">
+            <control:SearchAlbumHandler.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="8">
+                        <Label Text="{Binding Name}"
+                               FontSize="Medium"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                </DataTemplate>
+            </control:SearchAlbumHandler.ItemTemplate>
+        </control:SearchAlbumHandler>
+    </Shell.SearchHandler>
     <RefreshView IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding RefreshListAlbumCommand}">
         <CollectionView ItemsSource="{Binding Albums}"

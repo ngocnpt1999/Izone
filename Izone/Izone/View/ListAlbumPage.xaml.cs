@@ -16,6 +16,7 @@ namespace Izone.View
         {
             InitializeComponent();
             BindingContext = ViewModel.AlbumsManagerViewModel.Instance;
+            searchAlbum.Albums = ViewModel.AlbumsManagerViewModel.Instance.Albums;
         }
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

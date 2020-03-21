@@ -22,6 +22,7 @@ namespace Izone
         {
             Routing.RegisterRoute("memberprofile", typeof(View.ShowMemberInfoPage));
             Routing.RegisterRoute("media", typeof(View.MediaPage));
+            Routing.RegisterRoute("listsingle", typeof(View.ListSingleInAlbumPage));
         }
 
         protected override void OnSleep()
