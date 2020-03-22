@@ -10,13 +10,19 @@
     <Shell.SearchHandler>
         <control:SearchAlbumHandler Placeholder="..."
                                     ShowsResults="True"
-                                    x:Name="searchAlbum">
+                                    x:Name="searchAlbum"
+                                    SearchBoxVisibility="Collapsible">
             <control:SearchAlbumHandler.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="8">
+                    <StackLayout Padding="8"
+                                 Orientation="Horizontal">
+                        <Image Source="{Binding ImageUri}"
+                               Aspect="AspectFit"
+                               HeightRequest="80"/>
                         <Label Text="{Binding Name}"
                                FontSize="Medium"
-                               FontAttributes="Bold"/>
+                               FontAttributes="Bold"
+                               VerticalOptions="CenterAndExpand"/>
                     </StackLayout>
                 </DataTemplate>
             </control:SearchAlbumHandler.ItemTemplate>

@@ -10,13 +10,19 @@
     <Shell.SearchHandler>
         <control:SearchMemberHandler Placeholder="..."
                                      x:Name="searchControl"
-                                     ShowsResults="True">
+                                     ShowsResults="True"
+                                     SearchBoxVisibility="Collapsible">
             <control:SearchMemberHandler.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="8">
+                    <StackLayout Padding="8"
+                                 Orientation="Horizontal">
+                        <Image Source="{Binding Avatar}"
+                               Aspect="AspectFit"
+                               HeightRequest="80"/>
                         <Label Text="{Binding NickName}"
                                FontSize="Medium"
-                               FontAttributes="Bold"/>
+                               FontAttributes="Bold"
+                               VerticalOptions="CenterAndExpand"/>
                     </StackLayout>
                 </DataTemplate>
             </control:SearchMemberHandler.ItemTemplate>

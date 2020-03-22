@@ -10,7 +10,8 @@
     <Shell.SearchHandler>
         <control:SearchSingleHandler Placeholder="..."
                                      ShowsResults="True"
-                                     x:Name="searchSingle">
+                                     x:Name="searchSingle"
+                                     SearchBoxVisibility="Collapsible">
             <control:SearchSingleHandler.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="8">
