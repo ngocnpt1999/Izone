@@ -38,6 +38,7 @@ namespace Izone.ViewModel
             {
                 ID = 1,
                 Name = "COLOR*IZ",
+                ReleaseDate = new DateTime(2018, 10, 29),
                 ImageUri = "https://drive.google.com/uc?export=download&id=1eJ7Tewku5XEEv3zUb1gjjtkQcttxXidX"
             };
             album_1.Singles.Add(
@@ -101,6 +102,7 @@ namespace Izone.ViewModel
             {
                 ID = 2,
                 Name = "HEART*IZ",
+                ReleaseDate = new DateTime(2019, 4, 1),
                 ImageUri = "https://drive.google.com/uc?export=download&id=1SL5W3Arp5YDQHrs94WvIJ0f1ut2cyGrE"
             };
             album_2.Singles.Add(
@@ -172,6 +174,7 @@ namespace Izone.ViewModel
             {
                 ID = 3,
                 Name = "BLOOM*IZ",
+                ReleaseDate = new DateTime(2020, 2, 17),
                 ImageUri = "https://drive.google.com/uc?export=download&id=1s7OArexqMznBXu4YlAzhWDSCMW7dU3Cl"
             };
             album_3.Singles.Add(
@@ -270,10 +273,62 @@ namespace Izone.ViewModel
                     Mp3Uri = "https://drive.google.com/uc?export=download&id=14u_JfuMghgtPuxUzpLOBMgvZxtl1fkLy"
                 }
             );
+            //Album Suki-To-Iwasetai
+            Model.Album album_4 = new Model.Album()
+            {
+                ID = 4,
+                Name = "Suki To Iwasetai",
+                ReleaseDate = new DateTime(2019, 2, 6),
+                ImageUri = "https://drive.google.com/uc?export=download&id=1xmm9jgeiWjOo_0HVmAvI0Dg3c180Q5w2"
+            };
+            album_4.Singles.Add(
+                new Model.Single()
+                {
+                    ID = 1,
+                    Name = "Suki To Iwasetai",
+                    Mp3Uri = "https://drive.google.com/uc?export=download&id=1zuQQ7Xq8MQ1BHglPM7zun7TDQImX8RvD"
+                }
+            );
+            //Album Buenos-Aires
+            Model.Album album_5 = new Model.Album()
+            {
+                ID = 5,
+                Name = "Buenos Aires",
+                ReleaseDate = new DateTime(2019, 6, 26),
+                ImageUri = "https://drive.google.com/uc?export=download&id=1RoI4iQLg5ybQkB-hY11HZA50hZhbqsSB"
+            };
+            album_5.Singles.Add(
+                new Model.Single()
+                {
+                    ID = 1,
+                    Name = "Buenos Aires",
+                    Mp3Uri = "https://drive.google.com/uc?export=download&id=1zSGxzjMbx7AbRTDhqK8sv96DWBNe6UpD"
+                }
+            );
+            //Album Vampire
+            Model.Album album_6 = new Model.Album()
+            {
+                ID = 6,
+                Name = "Vampire",
+                ReleaseDate = new DateTime(2019, 9, 25),
+                ImageUri = "https://drive.google.com/uc?export=download&id=1mvY8I9iDoGDO2gYVB3TrPdDzcWus7b0U"
+            };
+            album_6.Singles.Add(
+                new Model.Single()
+                {
+                    ID = 1,
+                    Name = "Vampire",
+                    Mp3Uri = "https://drive.google.com/uc?export=download&id=1coD2biKyTLXOasOqLHpxQsFkSSLXI8nA"
+                }
+            );
             //
             Albums.Add(album_1);
             Albums.Add(album_2);
             Albums.Add(album_3);
+            Albums.Add(album_4);
+            Albums.Add(album_5);
+            Albums.Add(album_6);
+            Albums = new ObservableCollection<Model.Album>(Albums.OrderBy(x => x.ReleaseDate));
         }
 
         //

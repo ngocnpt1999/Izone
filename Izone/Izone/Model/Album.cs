@@ -13,6 +13,7 @@ namespace Izone.Model
 
         private int id;
         private string name;
+        private DateTime releaseDate;
         private string imageUri;
         private ObservableCollection<Single> singles = new ObservableCollection<Single>();
 
@@ -32,6 +33,15 @@ namespace Izone.Model
             {
                 name = value;
                 OnPropertyChanged("Name");
+            }
+        }
+        public DateTime ReleaseDate
+        {
+            get => releaseDate;
+            set
+            {
+                releaseDate = value;
+                OnPropertyChanged("ReleaseDate");
             }
         }
         public string ImageUri
@@ -56,12 +66,7 @@ namespace Izone.Model
         public void ShuffleListSingle()
         {
             Random rnd = new Random();
-            var randomList = Singles.OrderBy(x => rnd.Next()).ToList();
-            Singles.Clear();
-            foreach(var item in randomList)
-            {
-                Singles.Add(item);
-            }
+            Singles = new ObservableCollection<Single>(Singles.OrderBy(x => rnd.Next()));
         }
 
         void OnPropertyChanged(string propertyName)
