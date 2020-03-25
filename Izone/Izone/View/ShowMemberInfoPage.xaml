@@ -32,7 +32,7 @@
                 <Label Text="{Binding Role, StringFormat='Vai trò: {0}'}"
                        FontSize="Medium"
                        FontAttributes="Bold"/>
-                <Label Text="{Binding DateOfBirth, StringFormat='Sinh nhật: {0}'}"
+                <Label Text="{Binding Birthday, StringFormat='Sinh nhật: {0}'}"
                        FontSize="Medium"
                        FontAttributes="Bold"/>
                 <Label Text="{Binding Height, StringFormat='Chiều cao: {0}'}"

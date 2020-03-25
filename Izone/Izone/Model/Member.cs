@@ -13,11 +13,11 @@ namespace Izone.Model
 
         private int id;
         private string avatar;
-        private ObservableCollection<string> imagesUri = new ObservableCollection<string>();
+        private string[] imagesUri;
         private string fullName;
         private string nickName;
-        private ObservableCollection<string> listRole = new ObservableCollection<string>();
-        private string dateOfBirth;
+        private string[] listRole;
+        private string birthday;
         private string height;
         private string weight;
         private string bloodType;
@@ -40,10 +40,10 @@ namespace Izone.Model
                 OnPropertyChanged("Avatar");
             }
         }
-        public ObservableCollection<string> ImagesUri
+        public string[] ImagesUri
         {
             get => imagesUri;
-            private set
+            set
             {
                 imagesUri = value;
                 OnPropertyChanged("ImagesUri");
@@ -67,21 +67,21 @@ namespace Izone.Model
                 OnPropertyChanged("NickName");
             }
         }
-        public ObservableCollection<string> ListRole
+        public string[] ListRole
         {
             get => listRole;
-            private set
+            set
             {
                 listRole = value;
                 OnPropertyChanged("ListRole");
             }
         }
-        public string DateOfBirth
+        public string Birthday
         {
-            get => dateOfBirth;
+            get => birthday;
             set
             {
-                dateOfBirth = value;
+                birthday = value;
                 OnPropertyChanged("DateOfBirth");
             }
         }

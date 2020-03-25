@@ -17,18 +17,18 @@
             <StackLayout Orientation="Horizontal"
                          Padding="8">
                 <Button Text="Previous"
-                        HorizontalOptions="StartAndExpand"
+                        HorizontalOptions="Start"
                         x:Name="btnPrevious"
                         Clicked="btnPrevious_Clicked"/>
                 <Picker Title="Select a single"
                         x:Name="pickerSingle"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        ItemsSource="{Binding Singles}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        ItemsSource="{Binding .}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedIndexChanged="pickerSingle_SelectedIndexChanged"/>
                 <Button Text="Next"
-                        HorizontalOptions="EndAndExpand"
+                        HorizontalOptions="End"
                         x:Name="btnNext"
                         Clicked="btnNext_Clicked"/>
             </StackLayout>

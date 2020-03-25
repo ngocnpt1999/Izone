@@ -38,7 +38,7 @@ namespace Izone.View
             {
                 BindingContext = ViewModel.MembersManagerViewModel.Instance.Members.Where(x => x.ID == int.Parse(this.id)).FirstOrDefault();
             }
-            int countImages = (BindingContext as Model.Member).ImagesUri.Count;
+            int countImages = (BindingContext as Model.Member).ImagesUri.Length;
             Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>
             {
                 carouselView.Position = (carouselView.Position + 1) % countImages;

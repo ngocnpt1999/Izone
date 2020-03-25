@@ -24,7 +24,7 @@ namespace Izone.View
             var album = ((CollectionView)sender).SelectedItem as Model.Album;
             if (album != null)
             {
-                await Navigation.PushAsync(new ListSingleInAlbumPage(album));
+                await Navigation.PushAsync(new ListSingleInAlbumPage(album.ID));
                 ((CollectionView)sender).SelectedItem = null;
             }
         }

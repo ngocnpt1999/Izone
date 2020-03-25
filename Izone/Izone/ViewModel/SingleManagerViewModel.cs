@@ -3,42 +3,46 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Xamarin.Forms;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace Izone.ViewModel
 {
-    public class AlbumsManagerViewModel : INotifyPropertyChanged
+    public sealed class SingleManagerViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Model.Album> albums = new ObservableCollection<Model.Album>();
-
-        public ObservableCollection<Model.Album> Albums
+        private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
+        public ObservableCollection<Model.Single> Singles
         {
-            get => albums;
+            get => singles;
             private set
             {
-                albums = value;
-                OnPropertyChanged("Albums");
+                singles = value;
+                OnPropertyChanged("Singles");
             }
         }
 
-        private AlbumsManagerViewModel()
+        private SingleManagerViewModel()
         {
-            CreateListAlbum();
-            RefreshListAlbumCommand = new Command(ExcuteRefreshListAlbumCommand);
+            CreateListSingle();
+            //
+            RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private async void CreateListAlbum()
+        private async void CreateListSingle()
         {
             var helper = new Helper.FirebaseHelper();
-            var data = await helper.GetAlbumsAsync();
+            var data = await helper.GetSinglesAsync();
             foreach(var item in data)
             {
-                Albums.Add(item);
+                Singles.Add(item);
             }
+        }
+
+        public List<Model.Single> GetSinglesByAlbum(int idAlbum)
+        {
+            return Singles.Where(x => x.IdAlbum == idAlbum).OrderBy(x => x.ID).ToList();
         }
 
         //
@@ -53,19 +57,20 @@ namespace Izone.ViewModel
             }
         }
 
-        public Command RefreshListAlbumCommand { get; }
+        public Command RefreshListCommand { get; }
 
-        public void ExcuteRefreshListAlbumCommand()
+        public void ExcuteRefreshListCommand()
         {
-            Albums.Clear();
-            CreateListAlbum();
+            Singles.Clear();
+            CreateListSingle();
             IsRefreshing = false;
         }
 
+        //
         private static readonly object padlock = new object();
-        private static AlbumsManagerViewModel instance = null;
+        private static SingleManagerViewModel instance = null;
 
-        public static AlbumsManagerViewModel Instance
+        public static SingleManagerViewModel Instance
         {
             get
             {
@@ -73,7 +78,7 @@ namespace Izone.ViewModel
                 {
                     if (instance == null)
                     {
-                        instance = new AlbumsManagerViewModel();
+                        instance = new SingleManagerViewModel();
                     }
                     return instance;
                 }

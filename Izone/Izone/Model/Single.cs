@@ -10,6 +10,7 @@ namespace Izone.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int id;
+        private int idAlbum;
         private string name;
         private string mp3Uri;
 
@@ -20,6 +21,15 @@ namespace Izone.Model
             {
                 id = value;
                 OnPropertyChanged("ID");
+            }
+        }
+        public int IdAlbum
+        {
+            get => idAlbum;
+            set
+            {
+                idAlbum = value;
+                OnPropertyChanged("IdAlbum");
             }
         }
         public string Name 

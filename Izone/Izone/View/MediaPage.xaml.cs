@@ -32,10 +32,10 @@ namespace Izone.View
             InitializeComponent();
         }
 
-        public MediaPage(Model.Album album, int index)
+        public MediaPage(int idAlbum, int index)
         {
             InitializeComponent();
-            BindingContext = album;
+            BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(idAlbum);
             pickerSingle.SelectedIndex = index;
         }
 
@@ -44,7 +44,7 @@ namespace Izone.View
             base.OnAppearing();
             if (this.albumid != null && this.index != null)
             {
-                BindingContext = ViewModel.AlbumsManagerViewModel.Instance.Albums.Where(x => x.ID == int.Parse(this.albumid)).FirstOrDefault();
+                BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(int.Parse(this.albumid));
                 pickerSingle.SelectedIndex = int.Parse(this.index);
             }
         }
@@ -97,8 +97,8 @@ namespace Izone.View
             {
                 return;
             }
-            var album = (Model.Album)BindingContext;
-            var uri = new Uri(album.Singles[pickerSingle.SelectedIndex].Mp3Uri);
+            var singles = (List<Model.Single>)BindingContext;
+            var uri = new Uri(singles[pickerSingle.SelectedIndex].Mp3Uri);
             mediaView.Source = MediaSource.FromUri(uri);
             refreshView.IsRefreshing = true;
         }

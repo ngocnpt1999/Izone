@@ -25,11 +25,12 @@ namespace Izone.View
             InitializeComponent();
         }
 
-        public ListSingleInAlbumPage(Model.Album album)
+        public ListSingleInAlbumPage(int idAlbum)
         {
             InitializeComponent();
-            BindingContext = album;
-            searchSingle.Album = album;
+            this.id = idAlbum.ToString();
+            BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(idAlbum);
+            searchSingle.Singles = BindingContext as List<Model.Single>;
             refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
         }
 
@@ -38,16 +39,16 @@ namespace Izone.View
             base.OnAppearing();
             if (this.id != null)
             {
-                var album = ViewModel.AlbumsManagerViewModel.Instance.Albums.Where(x => x.ID == int.Parse(this.id)).FirstOrDefault();
-                BindingContext = album;
-                searchSingle.Album = album;
+                BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(int.Parse(this.id));
+                searchSingle.Singles = BindingContext as List<Model.Single>;
                 refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
             }
         }
 
         private void ExcuteRefreshListSingleCommand()
         {
-            ((Model.Album)BindingContext).ShuffleListSingle();
+            BindingContext = null;
+            BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(int.Parse(this.id));
             refreshView.IsRefreshing = false;
         }
 
@@ -56,9 +57,8 @@ namespace Izone.View
             var single = ((ListView)sender).SelectedItem as Model.Single;
             if (single != null)
             {
-                Model.Album album = BindingContext as Model.Album;
-                int index = album.Singles.IndexOf(single);
-                await Navigation.PushAsync(new MediaPage(album, index));
+                int index = (BindingContext as List<Model.Single>).IndexOf(single);
+                await Navigation.PushAsync(new MediaPage(single.IdAlbum, index));
                 ((ListView)sender).SelectedItem = null;
             }
         }

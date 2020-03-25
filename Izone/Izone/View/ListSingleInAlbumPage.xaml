@@ -24,7 +24,7 @@
         </control:SearchSingleHandler>
     </Shell.SearchHandler>
     <RefreshView x:Name="refreshView">
-        <ListView ItemsSource="{Binding Singles}"
+        <ListView ItemsSource="{Binding .}"
                   ItemSelected="ListView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>

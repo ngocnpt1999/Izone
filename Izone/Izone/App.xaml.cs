@@ -14,6 +14,7 @@ namespace Izone
 
             ViewModel.MembersManagerViewModel membersManager = ViewModel.MembersManagerViewModel.Instance;
             ViewModel.AlbumsManagerViewModel albumsManager = ViewModel.AlbumsManagerViewModel.Instance;
+            ViewModel.SingleManagerViewModel singleManager = ViewModel.SingleManagerViewModel.Instance;
 
             MainPage = new MainPage();
         }
