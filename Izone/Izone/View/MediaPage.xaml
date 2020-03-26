@@ -14,24 +14,34 @@
                           MediaEnded="mediaView_MediaEnded"
                           MediaFailed="mediaView_MediaFailed"
                           VerticalOptions="FillAndExpand"/>
-            <StackLayout Orientation="Horizontal"
-                         Padding="8">
-                <Button Text="Previous"
-                        HorizontalOptions="Start"
-                        x:Name="btnPrevious"
-                        Clicked="btnPrevious_Clicked"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Picker Title="Select a single"
                         x:Name="pickerSingle"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
+                        HorizontalOptions="CenterAndExpand"
                         ItemsSource="{Binding .}"
                         ItemDisplayBinding="{Binding Name}"
-                        SelectedIndexChanged="pickerSingle_SelectedIndexChanged"/>
-                <Button Text="Next"
-                        HorizontalOptions="End"
-                        x:Name="btnNext"
-                        Clicked="btnNext_Clicked"/>
-            </StackLayout>
+                        SelectedIndexChanged="pickerSingle_SelectedIndexChanged"
+                        Grid.Row="0"/>
+                <StackLayout Orientation="Horizontal"
+                             Padding="8"
+                             Grid.Row="1">
+                    <Button Text="Previous"
+                            HorizontalOptions="StartAndExpand"
+                            x:Name="btnPrevious"
+                            Clicked="btnPrevious_Clicked"/>
+                    <Button Text="Next"
+                            HorizontalOptions="EndAndExpand"
+                            x:Name="btnNext"
+                            Clicked="btnNext_Clicked"/>
+                </StackLayout>
+            </Grid>
         </StackLayout>
     </RefreshView>
 </ContentPage>
