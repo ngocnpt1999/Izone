@@ -29,9 +29,6 @@ namespace Izone.View
         {
             InitializeComponent();
             this.id = idAlbum.ToString();
-            BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(idAlbum);
-            searchSingle.Singles = BindingContext as List<Model.Single>;
-            refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
         }
 
         protected override void OnAppearing()
