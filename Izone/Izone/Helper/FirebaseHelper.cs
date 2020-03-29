@@ -9,11 +9,11 @@ using System.Globalization;
 
 namespace Izone.Helper
 {
-    public class FirebaseHelper
+    public sealed class FirebaseHelper
     {
         private FirebaseClient client;
 
-        public FirebaseHelper()
+        private FirebaseHelper()
         {
             client = new FirebaseClient("https://izoneapp-b4dee.firebaseio.com/");
         }
@@ -46,7 +46,7 @@ namespace Izone.Helper
             }).OrderBy(x => DateTime.ParseExact(x.ReleaseDate, "dd/MM/yyyy", CultureInfo.CurrentCulture)).ToList();
         }
 
-        public async Task<List<Model.Single>> GetSinglesAsync()
+        public async Task<List<Model.Single>> GetSinglesByAlbumAsync(int idAlbum)
         {
             return (await client.Child("Singles").OnceAsync<Model.Single>()).Select(x => new Model.Single()
             {
@@ -54,7 +54,25 @@ namespace Izone.Helper
                 IdAlbum = x.Object.IdAlbum,
                 Name = x.Object.Name,
                 Mp3Uri = x.Object.Mp3Uri
-            }).ToList();
+            }).Where(x => x.IdAlbum == idAlbum).ToList();
+        }
+
+        //
+        private static readonly object padlock = new object();
+        private static FirebaseHelper instance = null;
+        public static FirebaseHelper Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new FirebaseHelper();
+                    }
+                    return instance;
+                }
+            }
         }
     }
 }

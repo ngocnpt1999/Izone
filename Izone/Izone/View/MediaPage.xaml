@@ -25,7 +25,7 @@
                 <Picker Title="Select a single"
                         x:Name="pickerSingle"
                         HorizontalOptions="CenterAndExpand"
-                        ItemsSource="{Binding .}"
+                        ItemsSource="{Binding Singles}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedIndexChanged="pickerSingle_SelectedIndexChanged"
                         Grid.Row="0"/>

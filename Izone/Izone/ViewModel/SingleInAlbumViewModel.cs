@@ -8,10 +8,11 @@ using Xamarin.Forms;
 
 namespace Izone.ViewModel
 {
-    public sealed class SingleManagerViewModel : INotifyPropertyChanged
+    public class SingleInAlbumViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private int idAlbum;
         private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
         public ObservableCollection<Model.Single> Singles
         {
@@ -23,26 +24,21 @@ namespace Izone.ViewModel
             }
         }
 
-        private SingleManagerViewModel()
+        public SingleInAlbumViewModel(int idAlbum)
         {
-            CreateListSingle();
+            this.idAlbum = idAlbum;
+            LoadListSingle(this.idAlbum);
             //
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private async void CreateListSingle()
+        private async void LoadListSingle(int idAlbum)
         {
-            var helper = new Helper.FirebaseHelper();
-            var data = await helper.GetSinglesAsync();
+            var data = await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(idAlbum);
             foreach(var item in data)
             {
                 Singles.Add(item);
             }
-        }
-
-        public List<Model.Single> GetSinglesByAlbum(int idAlbum)
-        {
-            return Singles.Where(x => x.IdAlbum == idAlbum).OrderBy(x => x.ID).ToList();
         }
 
         //
@@ -62,27 +58,8 @@ namespace Izone.ViewModel
         public void ExcuteRefreshListCommand()
         {
             Singles.Clear();
-            CreateListSingle();
+            LoadListSingle(this.idAlbum);
             IsRefreshing = false;
-        }
-
-        //
-        private static readonly object padlock = new object();
-        private static SingleManagerViewModel instance = null;
-
-        public static SingleManagerViewModel Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new SingleManagerViewModel();
-                    }
-                    return instance;
-                }
-            }
         }
 
         void OnPropertyChanged(string propertyName)

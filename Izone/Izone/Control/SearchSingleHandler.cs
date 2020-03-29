@@ -9,8 +9,8 @@ namespace Izone.Control
 {
     public class SearchSingleHandler : SearchHandler
     {
-        private List<Model.Single> singles;
-        public List<Model.Single> Singles
+        private ObservableCollection<Model.Single> singles;
+        public ObservableCollection<Model.Single> Singles
         {
             get => singles;
             set => singles = value;

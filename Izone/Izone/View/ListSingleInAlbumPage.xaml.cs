@@ -20,6 +20,8 @@ namespace Izone.View
             set => id = Uri.UnescapeDataString(value);
         }
 
+        private ViewModel.SingleInAlbumViewModel viewModel;
+
         public ListSingleInAlbumPage()
         {
             InitializeComponent();
@@ -36,17 +38,10 @@ namespace Izone.View
             base.OnAppearing();
             if (this.id != null)
             {
-                BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(int.Parse(this.id));
-                searchSingle.Singles = BindingContext as List<Model.Single>;
-                refreshView.Command = new Command(ExcuteRefreshListSingleCommand);
+                viewModel = new ViewModel.SingleInAlbumViewModel(int.Parse(this.id));
+                BindingContext = viewModel;
+                searchSingle.Singles = viewModel.Singles;
             }
-        }
-
-        private void ExcuteRefreshListSingleCommand()
-        {
-            BindingContext = null;
-            BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(int.Parse(this.id));
-            refreshView.IsRefreshing = false;
         }
 
         private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

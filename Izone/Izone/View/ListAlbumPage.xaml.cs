@@ -12,11 +12,14 @@ namespace Izone.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListAlbumPage : ContentPage
     {
+        private ViewModel.ListAlbumViewModel viewModel;
+
         public ListAlbumPage()
         {
             InitializeComponent();
-            BindingContext = ViewModel.AlbumsManagerViewModel.Instance;
-            searchAlbum.Albums = ViewModel.AlbumsManagerViewModel.Instance.Albums;
+            viewModel = new ViewModel.ListAlbumViewModel();
+            BindingContext = viewModel;
+            searchAlbum.Albums = viewModel.Albums;
         }
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

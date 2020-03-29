@@ -36,7 +36,7 @@ namespace Izone.View
             base.OnAppearing();
             if (this.id != null)
             {
-                BindingContext = ViewModel.MembersManagerViewModel.Instance.Members.Where(x => x.ID == int.Parse(this.id)).FirstOrDefault();
+                BindingContext = (new ViewModel.ListMemberViewModel()).Members.Where(x => x.ID == int.Parse(this.id)).FirstOrDefault();
             }
             int countImages = (BindingContext as Model.Member).ImagesUri.Length;
             Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>

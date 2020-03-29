@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace Izone.ViewModel
 {
-    public sealed class MembersManagerViewModel : INotifyPropertyChanged
+    public class ListMemberViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,17 +23,16 @@ namespace Izone.ViewModel
             }
         }
 
-        private MembersManagerViewModel()
+        public ListMemberViewModel()
         {
-            CreateListMember();
+            LoadListMember();
             //
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private async void CreateListMember()
+        private async void LoadListMember()
         {
-            var helper = new Helper.FirebaseHelper();
-            var data = await helper.GetMembersAsync();
+            var data = await Helper.FirebaseHelper.Instance.GetMembersAsync();
             foreach(var item in data)
             {
                 Members.Add(item);
@@ -57,27 +56,8 @@ namespace Izone.ViewModel
         public void ExcuteRefreshListCommand()
         {
             Members.Clear();
-            CreateListMember();
+            LoadListMember();
             IsRefreshing = false;
-        }
-
-        //
-        private static readonly object padlock = new object();
-        private static MembersManagerViewModel instance = null;
-
-        public static MembersManagerViewModel Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new MembersManagerViewModel();
-                    }
-                    return instance;
-                }
-            }
         }
 
         void OnPropertyChanged(string propertyName)

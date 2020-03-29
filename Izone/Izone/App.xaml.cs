@@ -12,9 +12,7 @@ namespace Izone
 
             Device.SetFlags(new string[] { "MediaElement_Experimental", "CarouselView_Experimental", "IndicatorView_Experimental" });
 
-            ViewModel.MembersManagerViewModel membersManager = ViewModel.MembersManagerViewModel.Instance;
-            ViewModel.AlbumsManagerViewModel albumsManager = ViewModel.AlbumsManagerViewModel.Instance;
-            ViewModel.SingleManagerViewModel singleManager = ViewModel.SingleManagerViewModel.Instance;
+            var helper = Helper.FirebaseHelper.Instance;
 
             MainPage = new MainPage();
         }

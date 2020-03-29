@@ -27,6 +27,8 @@ namespace Izone.View
             set => index = Uri.UnescapeDataString(value);
         }
 
+        private ViewModel.SingleInAlbumViewModel viewModel;
+
         public MediaPage()
         {
             InitializeComponent();
@@ -35,8 +37,8 @@ namespace Izone.View
         public MediaPage(int idAlbum, int index)
         {
             InitializeComponent();
-            BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(idAlbum);
-            pickerSingle.SelectedIndex = index;
+            this.albumid = idAlbum.ToString();
+            this.index = index.ToString();
         }
 
         protected override void OnAppearing()
@@ -44,7 +46,8 @@ namespace Izone.View
             base.OnAppearing();
             if (this.albumid != null && this.index != null)
             {
-                BindingContext = ViewModel.SingleManagerViewModel.Instance.GetSinglesByAlbum(int.Parse(this.albumid));
+                viewModel = new ViewModel.SingleInAlbumViewModel(int.Parse(this.albumid));
+                BindingContext = viewModel;
                 pickerSingle.SelectedIndex = int.Parse(this.index);
             }
         }

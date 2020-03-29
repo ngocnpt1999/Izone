@@ -13,11 +13,14 @@ namespace Izone.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListMemberPage : ContentPage
     {
+        private ViewModel.ListMemberViewModel viewModel;
+
         public ListMemberPage()
         {
             InitializeComponent();
-            BindingContext = ViewModel.MembersManagerViewModel.Instance;
-            searchControl.Members = ViewModel.MembersManagerViewModel.Instance.Members;
+            viewModel = new ViewModel.ListMemberViewModel();
+            BindingContext = viewModel;
+            searchControl.Members = viewModel.Members;
         }
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

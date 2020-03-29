@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Izone.ViewModel
 {
-    public class AlbumsManagerViewModel : INotifyPropertyChanged
+    public class ListAlbumViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,16 +25,15 @@ namespace Izone.ViewModel
             }
         }
 
-        private AlbumsManagerViewModel()
+        public ListAlbumViewModel()
         {
-            CreateListAlbum();
+            LoadListAlbum();
             RefreshListAlbumCommand = new Command(ExcuteRefreshListAlbumCommand);
         }
 
-        private async void CreateListAlbum()
+        private async void LoadListAlbum()
         {
-            var helper = new Helper.FirebaseHelper();
-            var data = await helper.GetAlbumsAsync();
+            var data = await Helper.FirebaseHelper.Instance.GetAlbumsAsync();
             foreach(var item in data)
             {
                 Albums.Add(item);
@@ -58,26 +57,8 @@ namespace Izone.ViewModel
         public void ExcuteRefreshListAlbumCommand()
         {
             Albums.Clear();
-            CreateListAlbum();
+            LoadListAlbum();
             IsRefreshing = false;
-        }
-
-        private static readonly object padlock = new object();
-        private static AlbumsManagerViewModel instance = null;
-
-        public static AlbumsManagerViewModel Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new AlbumsManagerViewModel();
-                    }
-                    return instance;
-                }
-            }
         }
 
         void OnPropertyChanged(string propertyName)
