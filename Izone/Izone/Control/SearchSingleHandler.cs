@@ -33,7 +33,7 @@ namespace Izone.Control
         {
             base.OnItemSelected(item);
             string index = Singles.IndexOf((Model.Single)item).ToString();
-            await Shell.Current.GoToAsync($"media?albumid={Singles[0].IdAlbum.ToString()}&index={index}");
+            await Shell.Current.GoToAsync($"media?idAlbum={Singles[0].IdAlbum.ToString()}&index={index}");
         }
     }
 }

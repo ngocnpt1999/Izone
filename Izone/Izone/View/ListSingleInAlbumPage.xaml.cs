@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,7 @@ namespace Izone.View
             var single = ((ListView)sender).SelectedItem as Model.Single;
             if (single != null)
             {
-                int index = (BindingContext as List<Model.Single>).IndexOf(single);
+                int index = (((ListView)sender).ItemsSource as ObservableCollection<Model.Single>).IndexOf(single);
                 await Navigation.PushAsync(new MediaPage(single.IdAlbum, index));
                 ((ListView)sender).SelectedItem = null;
             }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Izone.ViewModel
 {
@@ -12,7 +12,7 @@ namespace Izone.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Model.Member> members = new ObservableCollection<Model.Member>();
+        private ObservableCollection<Model.Member> members;
         public ObservableCollection<Model.Member> Members
         {
             get => members;
@@ -30,13 +30,10 @@ namespace Izone.ViewModel
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private async void LoadListMember()
+        private void LoadListMember()
         {
-            var data = await Helper.FirebaseHelper.Instance.GetMembersAsync();
-            foreach(var item in data)
-            {
-                Members.Add(item);
-            }
+            var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetMembersAsync()).Result;
+            Members = new ObservableCollection<Model.Member>(data);
         }
 
         //
@@ -55,7 +52,6 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshListCommand()
         {
-            Members.Clear();
             LoadListMember();
             IsRefreshing = false;
         }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Izone.ViewModel
 {
@@ -13,7 +13,7 @@ namespace Izone.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int idAlbum;
-        private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
+        private ObservableCollection<Model.Single> singles;
         public ObservableCollection<Model.Single> Singles
         {
             get => singles;
@@ -32,13 +32,10 @@ namespace Izone.ViewModel
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private async void LoadListSingle(int idAlbum)
+        private void LoadListSingle(int idAlbum)
         {
-            var data = await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(idAlbum);
-            foreach(var item in data)
-            {
-                Singles.Add(item);
-            }
+            var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(idAlbum)).Result;
+            Singles = new ObservableCollection<Model.Single>(data);
         }
 
         //
@@ -57,7 +54,6 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshListCommand()
         {
-            Singles.Clear();
             LoadListSingle(this.idAlbum);
             IsRefreshing = false;
         }

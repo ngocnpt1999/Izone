@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +11,16 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty("AlbumID", "albumid")]
+    [QueryProperty("IdAlbum", "idAlbum")]
     [QueryProperty("Index", "index")]
     public partial class MediaPage : ContentPage
     {
-        private string albumid;
+        private string idAlbum;
         private string index;
-        public string AlbumID
+        public string IdAlbum
         {
-            get => albumid;
-            set => albumid = Uri.UnescapeDataString(value);
+            get => idAlbum;
+            set => idAlbum = Uri.UnescapeDataString(value);
         }
         public string Index
         {
@@ -37,16 +38,16 @@ namespace Izone.View
         public MediaPage(int idAlbum, int index)
         {
             InitializeComponent();
-            this.albumid = idAlbum.ToString();
+            this.idAlbum = idAlbum.ToString();
             this.index = index.ToString();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.albumid != null && this.index != null)
+            if (this.idAlbum != null && this.index != null)
             {
-                viewModel = new ViewModel.SingleInAlbumViewModel(int.Parse(this.albumid));
+                viewModel = new ViewModel.SingleInAlbumViewModel(int.Parse(this.idAlbum));
                 BindingContext = viewModel;
                 pickerSingle.SelectedIndex = int.Parse(this.index);
             }
@@ -100,7 +101,7 @@ namespace Izone.View
             {
                 return;
             }
-            var singles = (List<Model.Single>)BindingContext;
+            var singles = (ObservableCollection<Model.Single>)pickerSingle.ItemsSource;
             var uri = new Uri(singles[pickerSingle.SelectedIndex].Mp3Uri);
             mediaView.Source = MediaSource.FromUri(uri);
             refreshView.IsRefreshing = true;

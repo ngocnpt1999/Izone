@@ -18,7 +18,7 @@ namespace Izone.Helper
             client = new FirebaseClient("https://izoneapp-b4dee.firebaseio.com/");
         }
 
-        public async Task<List<Model.Member>> GetMembersAsync()
+        public async Task<IEnumerable<Model.Member>> GetMembersAsync()
         {
             return (await client.Child("Members").OnceAsync<Model.Member>()).Select(x => new Model.Member()
             {
@@ -32,10 +32,10 @@ namespace Izone.Helper
                 Height = x.Object.Height,
                 Weight = x.Object.Weight,
                 BloodType = x.Object.BloodType
-            }).OrderBy(x => x.ID).ToList();
+            }).OrderBy(x => x.ID);
         }
 
-        public async Task<List<Model.Album>> GetAlbumsAsync()
+        public async Task<IEnumerable<Model.Album>> GetAlbumsAsync()
         {
             return (await client.Child("Albums").OnceAsync<Model.Album>()).Select(x => new Model.Album()
             {
@@ -43,10 +43,10 @@ namespace Izone.Helper
                 Name = x.Object.Name,
                 ReleaseDate = x.Object.ReleaseDate,
                 ImageUri = x.Object.ImageUri
-            }).OrderBy(x => DateTime.ParseExact(x.ReleaseDate, "dd/MM/yyyy", CultureInfo.CurrentCulture)).ToList();
+            }).OrderBy(x => DateTime.ParseExact(x.ReleaseDate, "dd/MM/yyyy", CultureInfo.CurrentCulture));
         }
 
-        public async Task<List<Model.Single>> GetSinglesByAlbumAsync(int idAlbum)
+        public async Task<IEnumerable<Model.Single>> GetSinglesByAlbumAsync(int idAlbum)
         {
             return (await client.Child("Singles").OnceAsync<Model.Single>()).Select(x => new Model.Single()
             {
@@ -54,7 +54,7 @@ namespace Izone.Helper
                 IdAlbum = x.Object.IdAlbum,
                 Name = x.Object.Name,
                 Mp3Uri = x.Object.Mp3Uri
-            }).Where(x => x.IdAlbum == idAlbum).ToList();
+            }).Where(x => x.IdAlbum == idAlbum);
         }
 
         //
