@@ -6,10 +6,18 @@
        xmlns:views="clr-namespace:Izone.View"
        mc:Ignorable="d"
        x:Class="Izone.MainPage">
-    <FlyoutItem Title="Thành viên">
+    <Shell.FlyoutHeader>
+        <ContentView>
+            <Image Source="file.jpg"
+                   Aspect="AspectFit"/>
+        </ContentView>
+    </Shell.FlyoutHeader>
+    <FlyoutItem Title="Danh sách thành viên"
+                Icon="user.png">
         <views:ListMemberPage/>
     </FlyoutItem>
-    <FlyoutItem Title="Danh sách album">
+    <FlyoutItem Title="Danh sách album"
+                Icon="cd.png">
         <views:ListAlbumPage/>
     </FlyoutItem>
 </Shell>
