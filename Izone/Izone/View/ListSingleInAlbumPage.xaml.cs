@@ -11,14 +11,14 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty("ID", "id")]
+    [QueryProperty("AlbumName", "albumName")]
     public partial class ListSingleInAlbumPage : ContentPage
     {
-        private string id;
-        public string ID
+        private string albumName;
+        public string AlbumName
         {
-            get => id;
-            set => id = Uri.UnescapeDataString(value);
+            get => albumName;
+            set => albumName = Uri.UnescapeDataString(value);
         }
 
         private ViewModel.SingleInAlbumViewModel viewModel;
@@ -28,19 +28,20 @@ namespace Izone.View
             InitializeComponent();
         }
 
-        public ListSingleInAlbumPage(int idAlbum)
+        public ListSingleInAlbumPage(string albumName)
         {
             InitializeComponent();
-            this.id = idAlbum.ToString();
+            this.albumName = albumName;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.id != null)
+            if (this.albumName != null)
             {
-                viewModel = new ViewModel.SingleInAlbumViewModel(int.Parse(this.id));
+                viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName);
                 BindingContext = viewModel;
+                searchSingle.AlbumName = viewModel.AlbumName;
                 searchSingle.Singles = viewModel.Singles;
             }
         }
@@ -51,7 +52,7 @@ namespace Izone.View
             if (single != null)
             {
                 int index = (((ListView)sender).ItemsSource as ObservableCollection<Model.Single>).IndexOf(single);
-                await Navigation.PushAsync(new MediaPage(single.IdAlbum, index));
+                await Navigation.PushAsync(new MediaPage(this.albumName, index));
                 ((ListView)sender).SelectedItem = null;
             }
         }

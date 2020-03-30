@@ -9,7 +9,14 @@ namespace Izone.Control
 {
     public class SearchSingleHandler : SearchHandler
     {
+        private string albumName;
         private ObservableCollection<Model.Single> singles;
+
+        public string AlbumName
+        {
+            get => albumName;
+            set => albumName = value;
+        }
         public ObservableCollection<Model.Single> Singles
         {
             get => singles;
@@ -33,7 +40,7 @@ namespace Izone.Control
         {
             base.OnItemSelected(item);
             string index = Singles.IndexOf((Model.Single)item).ToString();
-            await Shell.Current.GoToAsync($"media?idAlbum={Singles[0].IdAlbum.ToString()}&index={index}");
+            await Shell.Current.GoToAsync($"media?albumName={albumName}&index={index}");
         }
     }
 }

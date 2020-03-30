@@ -11,16 +11,16 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty("IdAlbum", "idAlbum")]
+    [QueryProperty("AlbumName", "albumName")]
     [QueryProperty("Index", "index")]
     public partial class MediaPage : ContentPage
     {
-        private string idAlbum;
+        private string albumName;
         private string index;
-        public string IdAlbum
+        public string AlbumName
         {
-            get => idAlbum;
-            set => idAlbum = Uri.UnescapeDataString(value);
+            get => albumName;
+            set => albumName = Uri.UnescapeDataString(value);
         }
         public string Index
         {
@@ -35,19 +35,19 @@ namespace Izone.View
             InitializeComponent();
         }
 
-        public MediaPage(int idAlbum, int index)
+        public MediaPage(string albumName, int index)
         {
             InitializeComponent();
-            this.idAlbum = idAlbum.ToString();
+            this.albumName = albumName;
             this.index = index.ToString();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.idAlbum != null && this.index != null)
+            if (this.albumName != null && this.index != null)
             {
-                viewModel = new ViewModel.SingleInAlbumViewModel(int.Parse(this.idAlbum));
+                viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName);
                 BindingContext = viewModel;
                 pickerSingle.SelectedIndex = int.Parse(this.index);
             }

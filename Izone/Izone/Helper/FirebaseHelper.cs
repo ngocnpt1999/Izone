@@ -46,15 +46,14 @@ namespace Izone.Helper
             }).OrderBy(x => DateTime.ParseExact(x.ReleaseDate, "dd/MM/yyyy", CultureInfo.CurrentCulture));
         }
 
-        public async Task<IEnumerable<Model.Single>> GetSinglesByAlbumAsync(int idAlbum)
+        public async Task<IEnumerable<Model.Single>> GetSinglesByAlbumAsync(string albumName)
         {
-            return (await client.Child("Singles").OnceAsync<Model.Single>()).Select(x => new Model.Single()
+            return (await client.Child("Singles").Child(albumName).OnceAsync<Model.Single>()).Select(x => new Model.Single()
             {
                 ID = x.Object.ID,
-                IdAlbum = x.Object.IdAlbum,
                 Name = x.Object.Name,
                 Mp3Uri = x.Object.Mp3Uri
-            }).Where(x => x.IdAlbum == idAlbum);
+            });
         }
 
         //

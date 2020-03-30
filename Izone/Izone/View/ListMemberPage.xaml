@@ -40,7 +40,7 @@
                 <DataTemplate>
                     <ContentView>
                         <Frame BorderColor="Gray"
-                               CornerRadius="5"
+                               CornerRadius="10"
                                HasShadow="True"
                                Padding="8"
                                Margin="5">
