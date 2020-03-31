@@ -15,7 +15,7 @@ namespace Izone.Helper
 
         private FirebaseHelper()
         {
-            client = new FirebaseClient("https://izoneapp-b4dee.firebaseio.com/");
+            client = new FirebaseClient("https://izoneapp-4f52a.firebaseio.com/");
         }
 
         public async Task<IEnumerable<Model.Member>> GetMembersAsync()
