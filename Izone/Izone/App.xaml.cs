@@ -10,7 +10,7 @@ namespace Izone
         {
             InitializeComponent();
 
-            Device.SetFlags(new string[] { "MediaElement_Experimental", "CarouselView_Experimental", "IndicatorView_Experimental" });
+            Device.SetFlags(new string[] { "MediaElement_Experimental", "CarouselView_Experimental", "IndicatorView_Experimental", "Shell_UWP_Experimental" });
 
             var helper = Helper.FirebaseHelper.Instance;
 
