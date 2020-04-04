@@ -13,7 +13,8 @@
                           MediaOpened="mediaView_MediaOpened"
                           MediaEnded="mediaView_MediaEnded"
                           MediaFailed="mediaView_MediaFailed"
-                          VerticalOptions="FillAndExpand"/>
+                          VerticalOptions="Fill"
+                          HeightRequest="120"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

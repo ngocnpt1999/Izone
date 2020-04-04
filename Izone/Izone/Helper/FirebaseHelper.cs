@@ -53,7 +53,7 @@ namespace Izone.Helper
                 ID = x.Object.ID,
                 Name = x.Object.Name,
                 Mp3Uri = x.Object.Mp3Uri
-            });
+            }).OrderBy(x => x.ID);
         }
 
         //
