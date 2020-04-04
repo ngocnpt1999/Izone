@@ -13,7 +13,7 @@ namespace Izone.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string albumName;
-        private ObservableCollection<Model.Single> singles;
+        private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
 
         public string AlbumName
         {
@@ -45,7 +45,10 @@ namespace Izone.ViewModel
         private void LoadListSingle(string albumName)
         {
             var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(albumName)).Result;
-            Singles = new ObservableCollection<Model.Single>(data);
+            foreach(var item in data)
+            {
+                Singles.Add(item);
+            }
         }
 
         //

@@ -12,7 +12,7 @@ namespace Izone.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Model.Member> members;
+        private ObservableCollection<Model.Member> members = new ObservableCollection<Model.Member>();
         public ObservableCollection<Model.Member> Members
         {
             get => members;
@@ -30,10 +30,13 @@ namespace Izone.ViewModel
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private void LoadListMember()
+        private async void LoadListMember()
         {
-            var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetMembersAsync()).Result;
-            Members = new ObservableCollection<Model.Member>(data);
+            var data = await Helper.FirebaseHelper.Instance.GetMembersAsync();
+            foreach(var item in data)
+            {
+                Members.Add(item);
+            }
         }
 
         //

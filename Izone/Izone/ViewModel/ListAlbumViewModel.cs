@@ -12,7 +12,7 @@ namespace Izone.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Model.Album> albums;
+        private ObservableCollection<Model.Album> albums = new ObservableCollection<Model.Album>();
 
         public ObservableCollection<Model.Album> Albums
         {
@@ -30,10 +30,13 @@ namespace Izone.ViewModel
             RefreshListAlbumCommand = new Command(ExcuteRefreshListAlbumCommand);
         }
 
-        private void LoadListAlbum()
+        private async void LoadListAlbum()
         {
-            var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetAlbumsAsync()).Result;
-            Albums = new ObservableCollection<Model.Album>(data);
+            var data = await Helper.FirebaseHelper.Instance.GetAlbumsAsync();
+            foreach(var item in data)
+            {
+                Albums.Add(item);
+            }
         }
 
         //
