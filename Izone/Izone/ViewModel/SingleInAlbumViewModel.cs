@@ -14,6 +14,7 @@ namespace Izone.ViewModel
 
         private string albumName;
         private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
+        private int selectedSingleIndex = 0;
 
         public string AlbumName
         {
@@ -33,6 +34,15 @@ namespace Izone.ViewModel
                 OnPropertyChanged("Singles");
             }
         }
+        public int SelectedSingleIndex
+        {
+            get => selectedSingleIndex;
+            set
+            {
+                selectedSingleIndex = value;
+                OnPropertyChanged("SelectedSingleIndex");
+            }
+        }
 
         public SingleInAlbumViewModel(string albumName)
         {
@@ -42,12 +52,42 @@ namespace Izone.ViewModel
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private void LoadListSingle(string albumName)
+        private async void LoadListSingle(string albumName)
         {
-            var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(albumName)).Result;
+            var data = await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(albumName);
             foreach(var item in data)
             {
                 Singles.Add(item);
+                if (item == data[data.Count - 1])
+                {
+                    int temp = SelectedSingleIndex;
+                    SelectedSingleIndex = -1;
+                    SelectedSingleIndex = temp;
+                }
+            }
+        }
+
+        public void NextSingle()
+        {
+            if (SelectedSingleIndex == Singles.Count - 1)
+            {
+                SelectedSingleIndex = 0;
+            }
+            else
+            {
+                SelectedSingleIndex++;
+            }
+        }
+
+        public void PreviousSingle()
+        {
+            if (SelectedSingleIndex == 0)
+            {
+                SelectedSingleIndex = Singles.Count - 1;
+            }
+            else
+            {
+                SelectedSingleIndex--;
             }
         }
 

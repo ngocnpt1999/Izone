@@ -49,7 +49,7 @@ namespace Izone.View
             {
                 viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName);
                 BindingContext = viewModel;
-                pickerSingle.SelectedIndex = int.Parse(this.index);
+                viewModel.SelectedSingleIndex = int.Parse(this.index);
             }
         }
 
@@ -60,10 +60,7 @@ namespace Izone.View
 
         private void mediaView_MediaEnded(object sender, EventArgs e)
         {
-            if (pickerSingle.SelectedIndex < pickerSingle.ItemsSource.Count - 1)
-            {
-                pickerSingle.SelectedIndex++;
-            }
+            viewModel.NextSingle();
         }
 
         private void mediaView_MediaFailed(object sender, EventArgs e)
@@ -73,26 +70,12 @@ namespace Izone.View
 
         private void btnPrevious_Clicked(object sender, EventArgs e)
         {
-            if (pickerSingle.SelectedIndex > 0)
-            {
-                pickerSingle.SelectedIndex--;
-            }
-            else
-            {
-                pickerSingle.SelectedIndex = pickerSingle.ItemsSource.Count - 1;
-            }
+            viewModel.PreviousSingle();
         }
 
         private void btnNext_Clicked(object sender, EventArgs e)
         {
-            if (pickerSingle.SelectedIndex < pickerSingle.ItemsSource.Count - 1)
-            {
-                pickerSingle.SelectedIndex++;
-            }
-            else
-            {
-                pickerSingle.SelectedIndex = 0;
-            }
+            viewModel.NextSingle();
         }
 
         private void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)

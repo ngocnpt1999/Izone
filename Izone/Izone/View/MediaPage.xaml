@@ -28,6 +28,7 @@
                         HorizontalOptions="CenterAndExpand"
                         ItemsSource="{Binding Singles}"
                         ItemDisplayBinding="{Binding Name}"
+                        SelectedIndex="{Binding SelectedSingleIndex}"
                         SelectedIndexChanged="pickerSingle_SelectedIndexChanged"
                         Grid.Row="0"/>
                 <StackLayout Orientation="Horizontal"
