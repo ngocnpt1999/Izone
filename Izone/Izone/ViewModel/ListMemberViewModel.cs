@@ -55,6 +55,7 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshListCommand()
         {
+            Members.Clear();
             LoadListMember();
             IsRefreshing = false;
         }

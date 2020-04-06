@@ -14,7 +14,8 @@ namespace Izone.ViewModel
 
         private string albumName;
         private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
-        private int selectedSingleIndex = 0;
+        private int selectedSingleIndex = -1;
+        private Model.Single selectedSingle;
 
         public string AlbumName
         {
@@ -43,18 +44,36 @@ namespace Izone.ViewModel
                 OnPropertyChanged("SelectedSingleIndex");
             }
         }
+        public Model.Single SelectedSingle
+        {
+            get => selectedSingle;
+            set
+            {
+                selectedSingle = value;
+                OnPropertyChanged("SelectedSingle");
+            }
+        }
 
         public SingleInAlbumViewModel(string albumName)
         {
             this.albumName = albumName;
-            LoadListSingle(this.albumName);
+            LoadListSingle();
             //
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
-        private async void LoadListSingle(string albumName)
+        public SingleInAlbumViewModel(string albumName, int index)
         {
-            var data = await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(albumName);
+            this.albumName = albumName;
+            SelectedSingleIndex = index;
+            LoadListSingle();
+            //
+            RefreshListCommand = new Command(ExcuteRefreshListCommand);
+        }
+
+        private async void LoadListSingle()
+        {
+            var data = await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(this.albumName);
             foreach(var item in data)
             {
                 Singles.Add(item);
@@ -107,7 +126,8 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshListCommand()
         {
-            LoadListSingle(this.albumName);
+            Singles.Clear();
+            LoadListSingle();
             IsRefreshing = false;
         }
 

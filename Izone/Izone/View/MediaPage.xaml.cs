@@ -47,9 +47,8 @@ namespace Izone.View
             base.OnAppearing();
             if (this.albumName != null && this.index != null)
             {
-                viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName);
+                viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName, int.Parse(this.index));
                 BindingContext = viewModel;
-                viewModel.SelectedSingleIndex = int.Parse(this.index);
             }
         }
 
@@ -84,9 +83,6 @@ namespace Izone.View
             {
                 return;
             }
-            var singles = (ObservableCollection<Model.Single>)pickerSingle.ItemsSource;
-            var uri = new Uri(singles[pickerSingle.SelectedIndex].Mp3Uri);
-            mediaView.Source = MediaSource.FromUri(uri);
             refreshView.IsRefreshing = true;
         }
     }

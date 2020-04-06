@@ -55,6 +55,7 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshListAlbumCommand()
         {
+            Albums.Clear();
             LoadListAlbum();
             IsRefreshing = false;
         }

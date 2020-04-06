@@ -51,7 +51,7 @@ namespace Izone.View
             var single = ((ListView)sender).SelectedItem as Model.Single;
             if (single != null)
             {
-                int index = (((ListView)sender).ItemsSource as ObservableCollection<Model.Single>).IndexOf(single);
+                int index = viewModel.Singles.IndexOf(single);
                 await Navigation.PushAsync(new MediaPage(this.albumName, index));
                 ((ListView)sender).SelectedItem = null;
             }
