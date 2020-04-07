@@ -30,6 +30,8 @@ namespace Izone.View
 
         private ViewModel.SingleInAlbumViewModel viewModel;
 
+        private bool cancelToken = false;
+
         public MediaPage()
         {
             InitializeComponent();
@@ -52,14 +54,32 @@ namespace Izone.View
             }
         }
 
+        private async void StartAnimation()
+        {
+            cancelToken = false;
+            while (!cancelToken)
+            {
+                await ffimageCD.RotateTo(360, 10000);
+                await ffimageCD.RotateTo(0, 0);
+            }
+        }
+
+        private void StopAnimation()
+        {
+            cancelToken = true;
+            ViewExtensions.CancelAnimations(ffimageCD);
+        }
+
         private void mediaView_MediaOpened(object sender, EventArgs e)
         {
             refreshView.IsRefreshing = false;
+            StartAnimation();
         }
 
         private void mediaView_MediaEnded(object sender, EventArgs e)
         {
             viewModel.NextSingle();
+            StopAnimation();
         }
 
         private void mediaView_MediaFailed(object sender, EventArgs e)
@@ -69,11 +89,13 @@ namespace Izone.View
 
         private void btnPrevious_Clicked(object sender, EventArgs e)
         {
+            StopAnimation();
             viewModel.PreviousSingle();
         }
 
         private void btnNext_Clicked(object sender, EventArgs e)
         {
+            StopAnimation();
             viewModel.NextSingle();
         }
 
@@ -84,6 +106,11 @@ namespace Izone.View
                 return;
             }
             refreshView.IsRefreshing = true;
+        }
+
+        private void refreshView_Refreshing(object sender, EventArgs e)
+        {
+            ffimageCD.Rotation = 0;
         }
     }
 }

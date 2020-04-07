@@ -4,10 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimagetransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              mc:Ignorable="d"
              x:Class="Izone.View.MediaPage">
-    <RefreshView x:Name="refreshView">
-        <StackLayout>
+    <RefreshView x:Name="refreshView"
+                 Refreshing="refreshView_Refreshing">
+        <StackLayout Padding="10">
+            <ffimageloading:CachedImage Source="{Binding SelectedSingle.SingleImage}"
+                                        VerticalOptions="Fill"
+                                        HeightRequest="300"
+                                        DownsampleToViewSize="True"
+                                        x:Name="ffimageCD">
+                <ffimageloading:CachedImage.Transformations>
+                    <ffimagetransformation:CircleTransformation/>
+                </ffimageloading:CachedImage.Transformations>
+            </ffimageloading:CachedImage>
             <MediaElement x:Name="mediaView"
                           Source="{Binding SelectedSingle.Mp3Uri}"
                           AutoPlay="True"
@@ -16,7 +27,7 @@
                           MediaEnded="mediaView_MediaEnded"
                           MediaFailed="mediaView_MediaFailed"
                           VerticalOptions="Fill"
-                          HeightRequest="120"/>
+                          HeightRequest="110"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
