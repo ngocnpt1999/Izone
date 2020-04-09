@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:control="clr-namespace:Izone.Control"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="Izone.View.ListAlbumPage"
              Title="Danh sách album">
@@ -45,8 +46,9 @@
                                Padding="8"
                                Margin="5">
                             <StackLayout>
-                                <Image Source="{Binding ImageUri}"
-                                       Aspect="AspectFit"/>
+                                <ffimageloading:CachedImage Source="{Binding ImageUri}"
+                                                            HeightRequest="180"
+                                                            DownsampleToViewSize="True"/>
                                 <Label Text="{Binding Name}"
                                        FontAttributes="Bold"
                                        FontSize="Medium"/>

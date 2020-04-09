@@ -11,7 +11,6 @@
                  Refreshing="refreshView_Refreshing">
         <StackLayout Padding="10">
             <ffimageloading:CachedImage Source="{Binding SelectedSingle.SingleImage}"
-                                        VerticalOptions="Fill"
                                         HeightRequest="300"
                                         DownsampleToViewSize="True"
                                         x:Name="ffimageCD">
