@@ -22,6 +22,12 @@ namespace Izone.View
             searchAlbum.Albums = viewModel.Albums;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.IsRefreshing = true;
+        }
+
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var album = ((CollectionView)sender).SelectedItem as Model.Album;

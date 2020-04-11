@@ -1,39 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:control="clr-namespace:Izone.Control"
-             mc:Ignorable="d"
-             x:Class="Izone.View.ListSingleInAlbumPage"
-             Title="{Binding Name}">
+<ContentPage
+    x:Class="Izone.View.ListSingleInAlbumPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:Izone.Control"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding Name}"
+    mc:Ignorable="d">
     <Shell.SearchHandler>
-        <control:SearchSingleHandler Placeholder="..."
-                                     ShowsResults="True"
-                                     x:Name="searchSingle"
-                                     SearchBoxVisibility="Collapsible">
+        <control:SearchSingleHandler
+            x:Name="searchSingle"
+            Placeholder="..."
+            SearchBoxVisibility="Collapsible"
+            ShowsResults="True">
             <control:SearchSingleHandler.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="8">
-                        <Label Text="{Binding Name}"
-                               FontSize="Medium"
-                               FontAttributes="Bold"/>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="{Binding Name}" />
                     </StackLayout>
                 </DataTemplate>
             </control:SearchSingleHandler.ItemTemplate>
         </control:SearchSingleHandler>
     </Shell.SearchHandler>
-    <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                 Command="{Binding RefreshListCommand}">
-        <ListView ItemsSource="{Binding Singles}"
-                  ItemSelected="ListView_ItemSelected">
+    <RefreshView Command="{Binding RefreshListCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <ListView ItemSelected="ListView_ItemSelected" ItemsSource="{Binding Singles}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="8">
-                            <Label Text="{Binding Name}"
-                                   FontAttributes="Bold"
-                                   FontSize="Medium"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="{Binding Name}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

@@ -1,62 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:ffimagetransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             mc:Ignorable="d"
-             x:Class="Izone.View.MediaPage">
-    <RefreshView x:Name="refreshView"
-                 Refreshing="refreshView_Refreshing">
-        <StackLayout Padding="10">
-            <ffimageloading:CachedImage Source="{Binding SelectedSingle.SingleImage}"
-                                        HeightRequest="300"
-                                        DownsampleToViewSize="True"
-                                        x:Name="ffimageCD">
-                <ffimageloading:CachedImage.Transformations>
-                    <ffimagetransformation:CircleTransformation/>
-                </ffimageloading:CachedImage.Transformations>
-            </ffimageloading:CachedImage>
-            <MediaElement x:Name="mediaView"
-                          Source="{Binding SelectedSingle.Mp3Uri}"
-                          AutoPlay="True"
-                          ShowsPlaybackControls="True"
-                          MediaOpened="mediaView_MediaOpened"
-                          MediaEnded="mediaView_MediaEnded"
-                          MediaFailed="mediaView_MediaFailed"
-                          VerticalOptions="Fill"
-                          HeightRequest="110"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Picker Title="Select a single"
+<ContentPage
+    x:Class="Izone.View.MediaPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffimagetransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <RefreshView x:Name="refreshView" Refreshing="refreshView_Refreshing">
+        <ScrollView>
+            <StackLayout Padding="10">
+                <ffimageloading:CachedImage
+                    x:Name="ffimageCD"
+                    DownsampleToViewSize="True"
+                    HeightRequest="300"
+                    Source="{Binding SelectedSingle.SingleImage}">
+                    <ffimageloading:CachedImage.Transformations>
+                        <ffimagetransformation:CircleTransformation />
+                    </ffimageloading:CachedImage.Transformations>
+                </ffimageloading:CachedImage>
+                <MediaElement
+                    x:Name="mediaView"
+                    AutoPlay="True"
+                    HeightRequest="110"
+                    MediaEnded="mediaView_MediaEnded"
+                    MediaFailed="mediaView_MediaFailed"
+                    MediaOpened="mediaView_MediaOpened"
+                    ShowsPlaybackControls="True"
+                    Source="{Binding SelectedSingle.Mp3Uri}"
+                    VerticalOptions="Fill" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Picker
                         x:Name="pickerSingle"
+                        Title="Select a single"
+                        Grid.Row="0"
                         HorizontalOptions="CenterAndExpand"
-                        ItemsSource="{Binding Singles}"
                         ItemDisplayBinding="{Binding Name}"
+                        ItemsSource="{Binding Singles}"
                         SelectedIndex="{Binding SelectedSingleIndex}"
-                        SelectedItem="{Binding SelectedSingle}"
                         SelectedIndexChanged="pickerSingle_SelectedIndexChanged"
-                        Grid.Row="0"/>
-                <StackLayout Orientation="Horizontal"
-                             Padding="8"
-                             Grid.Row="1">
-                    <Button Text="Previous"
-                            HorizontalOptions="StartAndExpand"
+                        SelectedItem="{Binding SelectedSingle}" />
+                    <StackLayout
+                        Grid.Row="1"
+                        Padding="8"
+                        Orientation="Horizontal">
+                        <Button
                             x:Name="btnPrevious"
-                            Clicked="btnPrevious_Clicked"/>
-                    <Button Text="Next"
-                            HorizontalOptions="EndAndExpand"
+                            Clicked="btnPrevious_Clicked"
+                            HorizontalOptions="StartAndExpand"
+                            Text="Previous" />
+                        <Button
                             x:Name="btnNext"
-                            Clicked="btnNext_Clicked"/>
-                </StackLayout>
-            </Grid>
-        </StackLayout>
+                            Clicked="btnNext_Clicked"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Next" />
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
     </RefreshView>
 </ContentPage>

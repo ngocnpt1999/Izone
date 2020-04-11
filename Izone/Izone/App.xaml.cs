@@ -11,7 +11,7 @@ namespace Izone
             InitializeComponent();
 
             Device.SetFlags(new string[] { "MediaElement_Experimental", "CarouselView_Experimental",
-                "IndicatorView_Experimental", "Shell_UWP_Experimental", "UseLegacyRenderers" });
+                "IndicatorView_Experimental", "Shell_UWP_Experimental" });
 
             var helper = Helper.FirebaseHelper.Instance;
 
@@ -20,7 +20,7 @@ namespace Izone
 
         protected override void OnStart()
         {
-            Routing.RegisterRoute("memberprofile", typeof(View.ShowMemberInfoPage));
+            Routing.RegisterRoute("memberinfo", typeof(View.ShowMemberInfoPage));
             Routing.RegisterRoute("media", typeof(View.MediaPage));
             Routing.RegisterRoute("listsingle", typeof(View.ListSingleInAlbumPage));
         }

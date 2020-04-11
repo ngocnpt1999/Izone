@@ -23,6 +23,12 @@ namespace Izone.View
             searchControl.Members = viewModel.Members;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.IsRefreshing = true;
+        }
+
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var member = ((CollectionView)sender).SelectedItem as Model.Member;

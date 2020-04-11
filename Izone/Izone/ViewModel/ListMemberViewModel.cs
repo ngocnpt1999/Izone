@@ -25,22 +25,24 @@ namespace Izone.ViewModel
 
         public ListMemberViewModel()
         {
-            LoadListMember();
-            //
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
         private async void LoadListMember()
         {
             var data = await Helper.FirebaseHelper.Instance.GetMembersAsync();
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 Members.Add(item);
+                if (item == data[data.Count - 1])
+                {
+                    IsRefreshing = false;
+                }
             }
         }
 
         //
-        private bool isRefreshing;
+        private bool isRefreshing = false;
         public bool IsRefreshing
         {
             get => isRefreshing;
@@ -57,7 +59,6 @@ namespace Izone.ViewModel
         {
             Members.Clear();
             LoadListMember();
-            IsRefreshing = false;
         }
 
         void OnPropertyChanged(string propertyName)

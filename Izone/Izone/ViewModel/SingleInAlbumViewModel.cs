@@ -14,8 +14,6 @@ namespace Izone.ViewModel
 
         private string albumName;
         private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
-        private int selectedSingleIndex = -1;
-        private Model.Single selectedSingle;
 
         public string AlbumName
         {
@@ -35,83 +33,28 @@ namespace Izone.ViewModel
                 OnPropertyChanged("Singles");
             }
         }
-        public int SelectedSingleIndex
-        {
-            get => selectedSingleIndex;
-            set
-            {
-                selectedSingleIndex = value;
-                OnPropertyChanged("SelectedSingleIndex");
-            }
-        }
-        public Model.Single SelectedSingle
-        {
-            get => selectedSingle;
-            set
-            {
-                selectedSingle = value;
-                OnPropertyChanged("SelectedSingle");
-            }
-        }
 
         public SingleInAlbumViewModel(string albumName)
         {
             this.albumName = albumName;
-            LoadListSingle();
-            //
-            RefreshListCommand = new Command(ExcuteRefreshListCommand);
-        }
-
-        public SingleInAlbumViewModel(string albumName, int index)
-        {
-            this.albumName = albumName;
-            SelectedSingleIndex = index;
-            LoadListSingle();
-            //
             RefreshListCommand = new Command(ExcuteRefreshListCommand);
         }
 
         private async void LoadListSingle()
         {
             var data = await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(this.albumName);
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 Singles.Add(item);
                 if (item == data[data.Count - 1])
                 {
-                    int temp = SelectedSingleIndex;
-                    SelectedSingleIndex = -1;
-                    SelectedSingleIndex = temp;
+                    IsRefreshing = false;
                 }
             }
         }
 
-        public void NextSingle()
-        {
-            if (SelectedSingleIndex == Singles.Count - 1)
-            {
-                SelectedSingleIndex = 0;
-            }
-            else
-            {
-                SelectedSingleIndex++;
-            }
-        }
-
-        public void PreviousSingle()
-        {
-            if (SelectedSingleIndex == 0)
-            {
-                SelectedSingleIndex = Singles.Count - 1;
-            }
-            else
-            {
-                SelectedSingleIndex--;
-            }
-        }
-
         //
-        private bool isRefreshing;
+        private bool isRefreshing = false;
         public bool IsRefreshing
         {
             get => isRefreshing;
@@ -128,7 +71,6 @@ namespace Izone.ViewModel
         {
             Singles.Clear();
             LoadListSingle();
-            IsRefreshing = false;
         }
 
         void OnPropertyChanged(string propertyName)

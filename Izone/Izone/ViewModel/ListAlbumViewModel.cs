@@ -26,21 +26,24 @@ namespace Izone.ViewModel
 
         public ListAlbumViewModel()
         {
-            LoadListAlbum();
             RefreshListAlbumCommand = new Command(ExcuteRefreshListAlbumCommand);
         }
 
         private async void LoadListAlbum()
         {
             var data = await Helper.FirebaseHelper.Instance.GetAlbumsAsync();
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 Albums.Add(item);
+                if (item == data[data.Count - 1])
+                {
+                    IsRefreshing = false;
+                }
             }
         }
 
         //
-        private bool isRefreshing;
+        private bool isRefreshing = false;
         public bool IsRefreshing
         {
             get => isRefreshing;
@@ -57,7 +60,6 @@ namespace Izone.ViewModel
         {
             Albums.Clear();
             LoadListAlbum();
-            IsRefreshing = false;
         }
 
         void OnPropertyChanged(string propertyName)

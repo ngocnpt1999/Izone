@@ -20,6 +20,9 @@ namespace Izone.View
             set => id = Uri.UnescapeDataString(value);
         }
 
+        private ViewModel.MemberInfoViewModel viewModel;
+        private bool token = true;
+
         public ShowMemberInfoPage()
         {
             InitializeComponent();
@@ -36,14 +39,21 @@ namespace Izone.View
             base.OnAppearing();
             if (this.id != null)
             {
-                BindingContext = (new ViewModel.ListMemberViewModel()).Members.Where(x => x.ID == int.Parse(this.id)).FirstOrDefault();
+                viewModel = new ViewModel.MemberInfoViewModel(int.Parse(this.id));
+                BindingContext = viewModel.Member;
             }
             int countImages = (BindingContext as Model.Member).ImagesUri.Length;
             Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>
             {
                 carouselView.Position = (carouselView.Position + 1) % countImages;
-                return true;
+                return token;
             }));
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            token = false;
         }
     }
 }

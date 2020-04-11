@@ -28,7 +28,7 @@ namespace Izone.View
             set => index = Uri.UnescapeDataString(value);
         }
 
-        private ViewModel.SingleInAlbumViewModel viewModel;
+        private ViewModel.MediaPageViewModel viewModel;
 
         private bool cancelToken = false;
 
@@ -49,7 +49,7 @@ namespace Izone.View
             base.OnAppearing();
             if (this.albumName != null && this.index != null)
             {
-                viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName, int.Parse(this.index));
+                viewModel = new ViewModel.MediaPageViewModel(this.albumName, int.Parse(this.index));
                 BindingContext = viewModel;
             }
         }

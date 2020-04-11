@@ -32,7 +32,8 @@ namespace Izone.Control
         protected override async void OnItemSelected(object item)
         {
             base.OnItemSelected(item);
-            await Shell.Current.GoToAsync($"memberprofile?id={((Model.Member)item).ID.ToString()}");
+            string id = ((Model.Member)item).ID.ToString();
+            await Shell.Current.GoToAsync($"memberinfo?id={id}");
         }
     }
 }

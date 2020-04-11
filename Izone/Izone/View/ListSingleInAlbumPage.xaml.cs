@@ -44,6 +44,7 @@ namespace Izone.View
                 searchSingle.AlbumName = viewModel.AlbumName;
                 searchSingle.Singles = viewModel.Singles;
             }
+            viewModel.IsRefreshing = true;
         }
 
         private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

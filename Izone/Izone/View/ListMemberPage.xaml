@@ -1,56 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:control="clr-namespace:Izone.Control"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             mc:Ignorable="d"
-             x:Class="Izone.View.ListMemberPage"
-             Title="Danh sách thành viên">
+<ContentPage
+    x:Class="Izone.View.ListMemberPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:Izone.Control"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Danh sách thành viên"
+    mc:Ignorable="d">
     <Shell.SearchHandler>
-        <control:SearchMemberHandler Placeholder="..."
-                                     x:Name="searchControl"
-                                     ShowsResults="True"
-                                     SearchBoxVisibility="Collapsible">
+        <control:SearchMemberHandler
+            x:Name="searchControl"
+            Placeholder="..."
+            SearchBoxVisibility="Collapsible"
+            ShowsResults="True">
             <control:SearchMemberHandler.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="8"
-                                 Orientation="Horizontal">
-                        <Image Source="{Binding Avatar}"
-                               Aspect="AspectFit"
-                               HeightRequest="80"/>
-                        <Label Text="{Binding NickName}"
-                               FontSize="Medium"
-                               FontAttributes="Bold"
-                               VerticalOptions="CenterAndExpand"/>
+                    <StackLayout Padding="8" Orientation="Horizontal">
+                        <ffimageloading:CachedImage
+                            Aspect="AspectFit"
+                            HeightRequest="80"
+                            Source="{Binding Avatar}" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="{Binding NickName}"
+                            VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </DataTemplate>
             </control:SearchMemberHandler.ItemTemplate>
         </control:SearchMemberHandler>
     </Shell.SearchHandler>
-    <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                 Command="{Binding RefreshListCommand}">
-        <CollectionView ItemsSource="{Binding Members}"
-                        SelectionMode="Single"
-                        SelectionChanged="CollectionView_SelectionChanged">
+    <RefreshView Command="{Binding RefreshListCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView
+            ItemsSource="{Binding Members}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Span="2" Orientation="Vertical"/>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <ContentView>
-                        <Frame BorderColor="Gray"
-                               CornerRadius="10"
-                               HasShadow="True"
-                               Padding="8"
-                               Margin="5">
+                        <Frame
+                            Margin="5"
+                            Padding="8"
+                            BorderColor="Gray"
+                            CornerRadius="10"
+                            HasShadow="True">
                             <StackLayout>
-                                <ffimageloading:CachedImage Source="{Binding Avatar}"
-                                                            DownsampleToViewSize="True"/>
-                                <Label Text="{Binding NickName}"
-                                       FontAttributes="Bold"
-                                       FontSize="Medium"/>
+                                <ffimageloading:CachedImage Aspect="AspectFill" Source="{Binding Avatar}" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="{Binding NickName}" />
                             </StackLayout>
                         </Frame>
                     </ContentView>
