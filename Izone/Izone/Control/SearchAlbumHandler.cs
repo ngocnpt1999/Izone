@@ -32,8 +32,8 @@ namespace Izone.Control
         protected override async void OnItemSelected(object item)
         {
             base.OnItemSelected(item);
-            string name = ((Model.Album)item).Name;
-            await Shell.Current.GoToAsync($"listsingle?albumName={name}");
+            string albumName = ((Model.Album)item).Name;
+            await Shell.Current.GoToAsync($"listsingle?albumName={albumName}");
         }
     }
 }

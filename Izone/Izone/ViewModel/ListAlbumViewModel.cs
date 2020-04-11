@@ -26,12 +26,12 @@ namespace Izone.ViewModel
 
         public ListAlbumViewModel()
         {
-            RefreshListAlbumCommand = new Command(ExcuteRefreshListAlbumCommand);
+            RefreshCommand = new Command(ExcuteRefreshCommand);
         }
 
-        private async void LoadListAlbum()
+        private async void LoadData()
         {
-            var data = await Helper.FirebaseHelper.Instance.GetAlbumsAsync();
+            var data = await Helper.FirebaseHelper.Instance.GetListAlbumAsync();
             foreach (var item in data)
             {
                 Albums.Add(item);
@@ -54,12 +54,12 @@ namespace Izone.ViewModel
             }
         }
 
-        public Command RefreshListAlbumCommand { get; }
+        public Command RefreshCommand { get; }
 
-        public void ExcuteRefreshListAlbumCommand()
+        public void ExcuteRefreshCommand()
         {
             Albums.Clear();
-            LoadListAlbum();
+            LoadData();
         }
 
         void OnPropertyChanged(string propertyName)

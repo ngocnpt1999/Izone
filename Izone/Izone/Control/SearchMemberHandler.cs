@@ -33,7 +33,7 @@ namespace Izone.Control
         {
             base.OnItemSelected(item);
             string id = ((Model.Member)item).ID.ToString();
-            await Shell.Current.GoToAsync($"memberinfo?id={id}");
+            await Shell.Current.GoToAsync($"memberinfo?idmember={id}");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Izone.ViewModel
         public MemberInfoViewModel(int id)
         {
             this.id = id;
-            member = Task.Run(async () => (await Helper.FirebaseHelper.Instance.GetMembersAsync()).Find(x => x.ID == this.id)).Result;
+            member = Task.Run(async () => (await Helper.FirebaseHelper.Instance.GetListMemberAsync()).Find(x => x.ID == this.id)).Result;
         }
 
         void OnPropertyChanged(string propertyName)

@@ -32,7 +32,7 @@
             </control:SearchAlbumHandler.ItemTemplate>
         </control:SearchAlbumHandler>
     </Shell.SearchHandler>
-    <RefreshView Command="{Binding RefreshListAlbumCommand}" IsRefreshing="{Binding IsRefreshing}">
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <CollectionView
             ItemsSource="{Binding Albums}"
             SelectionChanged="CollectionView_SelectionChanged"

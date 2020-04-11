@@ -54,7 +54,7 @@ namespace Izone.ViewModel
 
         private async void LoadListSingle()
         {
-            var data = await Helper.FirebaseHelper.Instance.GetSinglesByAlbumAsync(this.albumName);
+            var data = await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName);
             foreach (var item in data)
             {
                 Singles.Add(item);

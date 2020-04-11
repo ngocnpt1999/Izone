@@ -18,7 +18,7 @@ namespace Izone.Helper
             client = new FirebaseClient("https://izoneapp-4f52a.firebaseio.com/");
         }
 
-        public async Task<List<Model.Member>> GetMembersAsync()
+        public async Task<List<Model.Member>> GetListMemberAsync()
         {
             return (await client.Child("Members").OnceAsync<Model.Member>()).Select(x => new Model.Member()
             {
@@ -35,7 +35,7 @@ namespace Izone.Helper
             }).OrderBy(x => x.ID).ToList();
         }
 
-        public async Task<List<Model.Album>> GetAlbumsAsync()
+        public async Task<List<Model.Album>> GetListAlbumAsync()
         {
             return (await client.Child("Albums").OnceAsync<Model.Album>()).Select(x => new Model.Album()
             {
@@ -46,7 +46,7 @@ namespace Izone.Helper
             }).OrderBy(x => DateTime.ParseExact(x.ReleaseDate, "dd/MM/yyyy", CultureInfo.CurrentCulture)).ToList();
         }
 
-        public async Task<List<Model.Single>> GetSinglesByAlbumAsync(string albumName)
+        public async Task<List<Model.Single>> GetListSingleByAlbumAsync(string albumName)
         {
             return (await client.Child("Singles").Child(albumName).OnceAsync<Model.Single>()).Select(x => new Model.Single()
             {

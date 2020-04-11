@@ -32,7 +32,7 @@
             </control:SearchMemberHandler.ItemTemplate>
         </control:SearchMemberHandler>
     </Shell.SearchHandler>
-    <RefreshView Command="{Binding RefreshListCommand}" IsRefreshing="{Binding IsRefreshing}">
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <CollectionView
             ItemsSource="{Binding Members}"
             SelectionChanged="CollectionView_SelectionChanged"
