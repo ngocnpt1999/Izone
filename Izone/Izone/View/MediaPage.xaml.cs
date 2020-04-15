@@ -72,7 +72,7 @@ namespace Izone.View
 
         private void mediaView_MediaOpened(object sender, EventArgs e)
         {
-            refreshView.IsRefreshing = false;
+            viewModel.IsRefreshing = false;
             StartAnimation();
         }
 
@@ -84,7 +84,7 @@ namespace Izone.View
 
         private void mediaView_MediaFailed(object sender, EventArgs e)
         {
-            refreshView.IsRefreshing = false;
+            viewModel.IsRefreshing = false;
         }
 
         private void btnPrevious_Clicked(object sender, EventArgs e)
@@ -97,15 +97,6 @@ namespace Izone.View
         {
             StopAnimation();
             viewModel.NextSingle();
-        }
-
-        private void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (pickerSingle.SelectedIndex < 0)
-            {
-                return;
-            }
-            refreshView.IsRefreshing = true;
         }
 
         private void refreshView_Refreshing(object sender, EventArgs e)

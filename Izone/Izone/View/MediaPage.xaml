@@ -8,7 +8,10 @@
     xmlns:ffimagetransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <RefreshView x:Name="refreshView" Refreshing="refreshView_Refreshing">
+    <RefreshView
+        x:Name="refreshView"
+        IsRefreshing="{Binding IsRefreshing}"
+        Refreshing="refreshView_Refreshing">
         <ScrollView>
             <StackLayout Padding="10">
                 <ffimageloading:CachedImage
@@ -46,7 +49,6 @@
                         ItemDisplayBinding="{Binding Name}"
                         ItemsSource="{Binding Singles}"
                         SelectedIndex="{Binding SelectedSingleIndex}"
-                        SelectedIndexChanged="pickerSingle_SelectedIndexChanged"
                         SelectedItem="{Binding SelectedSingle}" />
                     <StackLayout
                         Grid.Row="1"

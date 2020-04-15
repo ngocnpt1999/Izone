@@ -48,30 +48,23 @@ namespace Izone.ViewModel
         public MediaPageViewModel(string albumName, int index)
         {
             this.albumName = albumName;
-            SelectedSingleIndex = index;
-            LoadListSingle();
+            LoadListSingle(index);
         }
 
-        private async void LoadListSingle()
+        private async void LoadListSingle(int index)
         {
-            var data = await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName);
-            foreach (var item in data)
+            IsRefreshing = true;
+            await Task.Run(() =>
             {
-                Singles.Add(item);
-                if (item == data[data.Count - 1])
-                {
-                    if (SelectedSingleIndex > -1)
-                    {
-                        int temp = SelectedSingleIndex;
-                        SelectedSingleIndex = -1;
-                        SelectedSingleIndex = temp;
-                    }
-                }
-            }
+                var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName)).Result;
+                Singles = new ObservableCollection<Model.Single>(data);
+                SelectedSingleIndex = index;
+            });
         }
 
         public void NextSingle()
         {
+            IsRefreshing = true;
             if (SelectedSingleIndex == Singles.Count - 1)
             {
                 SelectedSingleIndex = 0;
@@ -84,6 +77,7 @@ namespace Izone.ViewModel
 
         public void PreviousSingle()
         {
+            IsRefreshing = true;
             if (SelectedSingleIndex == 0)
             {
                 SelectedSingleIndex = Singles.Count - 1;
@@ -95,7 +89,7 @@ namespace Izone.ViewModel
         }
 
         //
-        private bool isRefreshing;
+        private bool isRefreshing = false;
         public bool IsRefreshing
         {
             get => isRefreshing;
