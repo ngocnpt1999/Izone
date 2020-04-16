@@ -9,11 +9,13 @@ namespace Izone.Control
 {
     public class SearchAlbumHandler : SearchHandler
     {
-        private ObservableCollection<Model.Album> albums;
-        public ObservableCollection<Model.Album> Albums
+        public static readonly BindableProperty ListAlbumProperty =
+            BindableProperty.Create("ListAlbum", typeof(ObservableCollection<Model.Album>), typeof(SearchAlbumHandler));
+
+        public ObservableCollection<Model.Album> ListAlbum
         {
-            get => albums;
-            set => albums = value;
+            get => (ObservableCollection<Model.Album>)GetValue(ListAlbumProperty);
+            set => SetValue(ListAlbumProperty, value);
         }
 
         protected override void OnQueryChanged(string oldValue, string newValue)
@@ -25,7 +27,7 @@ namespace Izone.Control
             }
             else
             {
-                ItemsSource = albums.Where(x => x.Name.ToLower().Contains(newValue.ToLower())).ToList();
+                ItemsSource = ListAlbum.Where(x => x.Name.ToLower().Contains(newValue.ToLower())).ToList();
             }
         }
 

@@ -9,11 +9,14 @@ namespace Izone.Control
 {
     public class SearchMemberHandler : SearchHandler
     {
-        private ObservableCollection<Model.Member> members;
-        public ObservableCollection<Model.Member> Members
+        public static readonly BindableProperty ListMemberProperty =
+            BindableProperty.Create("ListMember", typeof(ObservableCollection<Model.Member>),
+                typeof(SearchMemberHandler));
+
+        public ObservableCollection<Model.Member> ListMember
         {
-            get => members;
-            set => members = value;
+            get => (ObservableCollection<Model.Member>)GetValue(ListMemberProperty);
+            set => SetValue(ListMemberProperty, value);
         }
 
         protected override void OnQueryChanged(string oldValue, string newValue)
@@ -25,7 +28,7 @@ namespace Izone.Control
             }
             else
             {
-                ItemsSource = members.Where(x => x.NickName.ToLower().Contains(newValue.ToLower())).ToList();
+                ItemsSource = ListMember.Where(x => x.NickName.ToLower().Contains(newValue.ToLower())).ToList();
             }
         }
 

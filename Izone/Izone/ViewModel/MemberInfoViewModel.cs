@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Izone.ViewModel
 {
@@ -20,17 +21,17 @@ namespace Izone.ViewModel
             set
             {
                 member = value;
-                OnPropertyChanged("Member");
+                OnPropertyChanged();
             }
         }
 
         public MemberInfoViewModel(int id)
         {
             this.id = id;
-            member = Task.Run(async () => (await Helper.FirebaseHelper.Instance.GetListMemberAsync()).Find(x => x.ID == this.id)).Result;
+            member = Task.Run(async () => (await Helper.FirebaseHelper.Instance.GetListMemberAsync()).Where(x => x.ID == this.id).FirstOrDefault()).Result;
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

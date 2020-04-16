@@ -9,18 +9,22 @@ namespace Izone.Control
 {
     public class SearchSingleHandler : SearchHandler
     {
-        private string albumName;
-        private ObservableCollection<Model.Single> singles;
+        public static readonly BindableProperty AlbumNameProperty =
+            BindableProperty.Create("AlbumName", typeof(string), typeof(SearchSingleHandler), "");
+
+        public static readonly BindableProperty ListSingleProperty =
+            BindableProperty.Create("ListSingle", typeof(ObservableCollection<Model.Single>), typeof(SearchSingleHandler));
 
         public string AlbumName
         {
-            get => albumName;
-            set => albumName = value;
+            get => (string)GetValue(AlbumNameProperty);
+            set => SetValue(AlbumNameProperty, value);
         }
-        public ObservableCollection<Model.Single> Singles
+
+        public ObservableCollection<Model.Single> ListSingle
         {
-            get => singles;
-            set => singles = value;
+            get => (ObservableCollection<Model.Single>)GetValue(ListSingleProperty);
+            set => SetValue(ListSingleProperty, value);
         }
 
         protected override void OnQueryChanged(string oldValue, string newValue)
@@ -32,15 +36,15 @@ namespace Izone.Control
             }
             else
             {
-                ItemsSource = Singles.Where(x => x.Name.ToLower().Contains(newValue.ToLower())).ToList();
+                ItemsSource = ListSingle.Where(x => x.Name.ToLower().Contains(newValue.ToLower())).ToList();
             }
         }
 
         protected override async void OnItemSelected(object item)
         {
             base.OnItemSelected(item);
-            string index = Singles.IndexOf((Model.Single)item).ToString();
-            await Shell.Current.GoToAsync($"media?albumName={albumName}&index={index}");
+            string index = ListSingle.IndexOf((Model.Single)item).ToString();
+            await Shell.Current.GoToAsync($"media?albumName={AlbumName}&index={index}");
         }
     }
 }

@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Izone.ViewModel
 {
@@ -12,14 +13,14 @@ namespace Izone.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Model.Member> members = new ObservableCollection<Model.Member>();
-        public ObservableCollection<Model.Member> Members
+        private ObservableCollection<Model.Member> listMember = new ObservableCollection<Model.Member>();
+        public ObservableCollection<Model.Member> ListMember
         {
-            get => members;
+            get => listMember;
             private set
             {
-                members = value;
-                OnPropertyChanged("Members");
+                listMember = value;
+                OnPropertyChanged();
             }
         }
 
@@ -30,15 +31,12 @@ namespace Izone.ViewModel
 
         private async void LoadData()
         {
-            var data = await Helper.FirebaseHelper.Instance.GetListMemberAsync();
-            foreach (var item in data)
+            await Task.Run(() =>
             {
-                Members.Add(item);
-                if (item == data[data.Count - 1])
-                {
-                    IsRefreshing = false;
-                }
-            }
+                var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetListMemberAsync()).Result;
+                ListMember = new ObservableCollection<Model.Member>(data);
+                IsRefreshing = false;
+            });
         }
 
         //
@@ -49,7 +47,7 @@ namespace Izone.ViewModel
             set
             {
                 isRefreshing = value;
-                OnPropertyChanged("IsRefreshing");
+                OnPropertyChanged();
             }
         }
 
@@ -57,11 +55,11 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshCommand()
         {
-            Members.Clear();
+            ListMember.Clear();
             LoadData();
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Runtime.CompilerServices;
 
 namespace Izone.ViewModel
 {
@@ -13,17 +14,17 @@ namespace Izone.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string albumName;
-        private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
+        private ObservableCollection<Model.Single> listSingle = new ObservableCollection<Model.Single>();
         private int selectedSingleIndex = -1;
         private Model.Single selectedSingle;
 
-        public ObservableCollection<Model.Single> Singles
+        public ObservableCollection<Model.Single> ListSingle
         {
-            get => singles;
+            get => listSingle;
             private set
             {
-                singles = value;
-                OnPropertyChanged("Singles");
+                listSingle = value;
+                OnPropertyChanged();
             }
         }
         public int SelectedSingleIndex
@@ -32,7 +33,7 @@ namespace Izone.ViewModel
             set
             {
                 selectedSingleIndex = value;
-                OnPropertyChanged("SelectedSingleIndex");
+                OnPropertyChanged();
             }
         }
         public Model.Single SelectedSingle
@@ -41,7 +42,7 @@ namespace Izone.ViewModel
             set
             {
                 selectedSingle = value;
-                OnPropertyChanged("SelectedSingle");
+                OnPropertyChanged();
             }
         }
 
@@ -57,7 +58,7 @@ namespace Izone.ViewModel
             await Task.Run(() =>
             {
                 var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName)).Result;
-                Singles = new ObservableCollection<Model.Single>(data);
+                ListSingle = new ObservableCollection<Model.Single>(data);
                 SelectedSingleIndex = index;
             });
         }
@@ -65,7 +66,7 @@ namespace Izone.ViewModel
         public void NextSingle()
         {
             IsRefreshing = true;
-            if (SelectedSingleIndex == Singles.Count - 1)
+            if (SelectedSingleIndex == ListSingle.Count - 1)
             {
                 SelectedSingleIndex = 0;
             }
@@ -80,7 +81,7 @@ namespace Izone.ViewModel
             IsRefreshing = true;
             if (SelectedSingleIndex == 0)
             {
-                SelectedSingleIndex = Singles.Count - 1;
+                SelectedSingleIndex = ListSingle.Count - 1;
             }
             else
             {
@@ -96,11 +97,11 @@ namespace Izone.ViewModel
             set
             {
                 isRefreshing = value;
-                OnPropertyChanged("IsRefreshing");
+                OnPropertyChanged();
             }
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

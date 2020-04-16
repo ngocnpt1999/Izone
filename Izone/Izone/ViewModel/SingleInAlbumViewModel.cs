@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Izone.ViewModel
 {
@@ -13,7 +14,7 @@ namespace Izone.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string albumName;
-        private ObservableCollection<Model.Single> singles = new ObservableCollection<Model.Single>();
+        private ObservableCollection<Model.Single> listSingle = new ObservableCollection<Model.Single>();
 
         public string AlbumName
         {
@@ -21,16 +22,16 @@ namespace Izone.ViewModel
             private set
             {
                 albumName = value;
-                OnPropertyChanged("AlbumName");
+                OnPropertyChanged();
             }
         }
-        public ObservableCollection<Model.Single> Singles
+        public ObservableCollection<Model.Single> ListSingle
         {
-            get => singles;
+            get => listSingle;
             private set
             {
-                singles = value;
-                OnPropertyChanged("Singles");
+                listSingle = value;
+                OnPropertyChanged();
             }
         }
 
@@ -42,15 +43,12 @@ namespace Izone.ViewModel
 
         private async void LoadData()
         {
-            var data = await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName);
-            foreach (var item in data)
+            await Task.Run(() =>
             {
-                Singles.Add(item);
-                if (item == data[data.Count - 1])
-                {
-                    IsRefreshing = false;
-                }
-            }
+                var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName)).Result;
+                ListSingle = new ObservableCollection<Model.Single>(data);
+                IsRefreshing = false;
+            });
         }
 
         //
@@ -61,7 +59,7 @@ namespace Izone.ViewModel
             set
             {
                 isRefreshing = value;
-                OnPropertyChanged("IsRefreshing");
+                OnPropertyChanged();
             }
         }
 
@@ -69,11 +67,11 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshCommand()
         {
-            Singles.Clear();
+            ListSingle.Clear();
             LoadData();
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -41,8 +41,6 @@ namespace Izone.View
             {
                 viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName);
                 BindingContext = viewModel;
-                searchSingle.AlbumName = viewModel.AlbumName;
-                searchSingle.Singles = viewModel.Singles;
             }
             viewModel.IsRefreshing = true;
         }
@@ -52,7 +50,7 @@ namespace Izone.View
             var single = ((ListView)sender).SelectedItem as Model.Single;
             if (single != null)
             {
-                int index = viewModel.Singles.IndexOf(single);
+                int index = viewModel.ListSingle.IndexOf(single);
                 await Navigation.PushAsync(new MediaPage(this.albumName, index));
                 ((ListView)sender).SelectedItem = null;
             }

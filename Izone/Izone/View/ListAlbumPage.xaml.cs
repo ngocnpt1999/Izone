@@ -19,7 +19,6 @@ namespace Izone.View
             InitializeComponent();
             viewModel = new ViewModel.ListAlbumViewModel();
             BindingContext = viewModel;
-            searchAlbum.Albums = viewModel.Albums;
         }
 
         protected override void OnAppearing()

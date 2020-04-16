@@ -11,6 +11,8 @@
     <Shell.SearchHandler>
         <control:SearchSingleHandler
             x:Name="searchSingle"
+            AlbumName="{Binding AlbumName}"
+            ListSingle="{Binding ListSingle}"
             Placeholder="..."
             SearchBoxVisibility="Collapsible"
             ShowsResults="True">
@@ -27,7 +29,7 @@
         </control:SearchSingleHandler>
     </Shell.SearchHandler>
     <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-        <ListView ItemSelected="ListView_ItemSelected" ItemsSource="{Binding Singles}">
+        <ListView ItemSelected="ListView_ItemSelected" ItemsSource="{Binding ListSingle}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

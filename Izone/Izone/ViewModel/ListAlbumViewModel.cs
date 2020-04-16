@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Izone.ViewModel
 {
@@ -12,15 +13,15 @@ namespace Izone.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Model.Album> albums = new ObservableCollection<Model.Album>();
+        private ObservableCollection<Model.Album> listAlbum = new ObservableCollection<Model.Album>();
 
-        public ObservableCollection<Model.Album> Albums
+        public ObservableCollection<Model.Album> ListAlbum
         {
-            get => albums;
+            get => listAlbum;
             private set
             {
-                albums = value;
-                OnPropertyChanged("Albums");
+                listAlbum = value;
+                OnPropertyChanged();
             }
         }
 
@@ -31,15 +32,12 @@ namespace Izone.ViewModel
 
         private async void LoadData()
         {
-            var data = await Helper.FirebaseHelper.Instance.GetListAlbumAsync();
-            foreach (var item in data)
+            await Task.Run(() =>
             {
-                Albums.Add(item);
-                if (item == data[data.Count - 1])
-                {
-                    IsRefreshing = false;
-                }
-            }
+                var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetListAlbumAsync()).Result;
+                ListAlbum = new ObservableCollection<Model.Album>(data);
+                IsRefreshing = false;
+            });
         }
 
         //
@@ -50,7 +48,7 @@ namespace Izone.ViewModel
             set
             {
                 isRefreshing = value;
-                OnPropertyChanged("IsRefreshing");
+                OnPropertyChanged();
             }
         }
 
@@ -58,11 +56,11 @@ namespace Izone.ViewModel
 
         public void ExcuteRefreshCommand()
         {
-            Albums.Clear();
+            ListAlbum.Clear();
             LoadData();
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

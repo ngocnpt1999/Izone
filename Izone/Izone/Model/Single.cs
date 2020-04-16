@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Izone.Model
 {
@@ -20,7 +21,7 @@ namespace Izone.Model
             set
             {
                 id = value;
-                OnPropertyChanged("ID");
+                OnPropertyChanged();
             }
         }
         public string Name 
@@ -29,7 +30,7 @@ namespace Izone.Model
             set
             {
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged();
             }
         }
         public string Mp3Uri 
@@ -38,7 +39,7 @@ namespace Izone.Model
             set
             {
                 mp3Uri = value;
-                OnPropertyChanged("Mp3Uri");
+                OnPropertyChanged();
             }
         }
         public string SingleImage
@@ -47,11 +48,11 @@ namespace Izone.Model
             set
             {
                 singleImage = value;
-                OnPropertyChanged("SingleImage");
+                OnPropertyChanged();
             }
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Linq;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Izone.Model
 {
@@ -28,7 +29,7 @@ namespace Izone.Model
             set
             {
                 id = value;
-                OnPropertyChanged("ID");
+                OnPropertyChanged();
             }
         }
         public string Avatar
@@ -37,7 +38,7 @@ namespace Izone.Model
             set
             {
                 avatar = value;
-                OnPropertyChanged("Avatar");
+                OnPropertyChanged();
             }
         }
         public string[] ImagesUri
@@ -46,7 +47,7 @@ namespace Izone.Model
             set
             {
                 imagesUri = value;
-                OnPropertyChanged("ImagesUri");
+                OnPropertyChanged();
             }
         }
         public string FullName
@@ -55,7 +56,7 @@ namespace Izone.Model
             set
             {
                 fullName = value;
-                OnPropertyChanged("FullName");
+                OnPropertyChanged();
             }
         }
         public string NickName
@@ -64,7 +65,7 @@ namespace Izone.Model
             set
             {
                 nickName = value;
-                OnPropertyChanged("NickName");
+                OnPropertyChanged();
             }
         }
         public string[] ListRole
@@ -73,7 +74,7 @@ namespace Izone.Model
             set
             {
                 listRole = value;
-                OnPropertyChanged("ListRole");
+                OnPropertyChanged();
             }
         }
         public string Birthday
@@ -82,7 +83,7 @@ namespace Izone.Model
             set
             {
                 birthday = value;
-                OnPropertyChanged("DateOfBirth");
+                OnPropertyChanged();
             }
         }
         public string Height
@@ -91,7 +92,7 @@ namespace Izone.Model
             set
             {
                 height = value;
-                OnPropertyChanged("Height");
+                OnPropertyChanged();
             }
         }
         public string Weight
@@ -100,7 +101,7 @@ namespace Izone.Model
             set
             {
                 weight = value;
-                OnPropertyChanged("Weight");
+                OnPropertyChanged();
             }
         }
         public string BloodType
@@ -109,7 +110,7 @@ namespace Izone.Model
             set
             {
                 bloodType = value;
-                OnPropertyChanged("BloodType");
+                OnPropertyChanged();
             }
         }
 
@@ -122,7 +123,7 @@ namespace Izone.Model
             }
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

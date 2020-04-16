@@ -12,6 +12,7 @@
     <Shell.SearchHandler>
         <control:SearchMemberHandler
             x:Name="searchControl"
+            ListMember="{Binding ListMember}"
             Placeholder="..."
             SearchBoxVisibility="Collapsible"
             ShowsResults="True">
@@ -34,7 +35,7 @@
     </Shell.SearchHandler>
     <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <CollectionView
-            ItemsSource="{Binding Members}"
+            ItemsSource="{Binding ListMember}"
             SelectionChanged="CollectionView_SelectionChanged"
             SelectionMode="Single">
             <CollectionView.ItemsLayout>

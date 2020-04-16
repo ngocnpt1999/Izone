@@ -20,7 +20,6 @@ namespace Izone.View
             InitializeComponent();
             viewModel = new ViewModel.ListMemberViewModel();
             BindingContext = viewModel;
-            searchControl.Members = viewModel.Members;
         }
 
         protected override void OnAppearing()

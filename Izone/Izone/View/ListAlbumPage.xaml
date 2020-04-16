@@ -12,6 +12,7 @@
     <Shell.SearchHandler>
         <control:SearchAlbumHandler
             x:Name="searchAlbum"
+            ListAlbum="{Binding ListAlbum}"
             Placeholder="..."
             SearchBoxVisibility="Collapsible"
             ShowsResults="True">
@@ -34,7 +35,7 @@
     </Shell.SearchHandler>
     <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
         <CollectionView
-            ItemsSource="{Binding Albums}"
+            ItemsSource="{Binding ListAlbum}"
             SelectionChanged="CollectionView_SelectionChanged"
             SelectionMode="Single">
             <CollectionView.ItemsLayout>

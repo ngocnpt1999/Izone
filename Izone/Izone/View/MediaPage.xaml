@@ -47,7 +47,7 @@
                         Grid.Row="0"
                         HorizontalOptions="CenterAndExpand"
                         ItemDisplayBinding="{Binding Name}"
-                        ItemsSource="{Binding Singles}"
+                        ItemsSource="{Binding ListSingle}"
                         SelectedIndex="{Binding SelectedSingleIndex}"
                         SelectedItem="{Binding SelectedSingle}" />
                     <StackLayout
