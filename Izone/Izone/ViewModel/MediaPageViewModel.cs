@@ -48,18 +48,35 @@ namespace Izone.ViewModel
 
         public MediaPageViewModel(string albumName, int index)
         {
-            this.albumName = albumName;
-            LoadListSingle(index);
+            LoadListSingle(albumName, index);
         }
 
-        private async void LoadListSingle(int index)
+        public MediaPageViewModel(List<Model.Single> listSingle)
+        {
+            LoadListSingle(listSingle);
+        }
+
+        private async void LoadListSingle(string albumName, int index)
         {
             IsRefreshing = true;
             await Task.Run(() =>
             {
+                this.albumName = albumName;
                 var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName)).Result;
                 ListSingle = new ObservableCollection<Model.Single>(data);
                 SelectedSingleIndex = index;
+                SelectedSingle = ListSingle[index];
+            });
+        }
+
+        private async void LoadListSingle(List<Model.Single> listSingle)
+        {
+            IsRefreshing = true;
+            await Task.Run(() =>
+            {
+                ListSingle = new ObservableCollection<Model.Single>(listSingle);
+                SelectedSingleIndex = 0;
+                SelectedSingle = ListSingle[0];
             });
         }
 

@@ -10,7 +10,7 @@ namespace Izone.Control
     public class SearchMemberHandler : SearchHandler
     {
         public static readonly BindableProperty ListMemberProperty =
-            BindableProperty.Create("ListMember", typeof(ObservableCollection<Model.Member>),
+            BindableProperty.Create(nameof(ListMember), typeof(ObservableCollection<Model.Member>),
                 typeof(SearchMemberHandler));
 
         public ObservableCollection<Model.Member> ListMember

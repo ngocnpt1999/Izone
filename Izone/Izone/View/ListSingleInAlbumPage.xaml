@@ -8,6 +8,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding Name}"
     mc:Ignorable="d">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Clicked="ToolbarItem_Clicked"
+            IconImageSource="play_icon.png"
+            Order="Primary"
+            Priority="0"
+            Text="Play" />
+    </ContentPage.ToolbarItems>
     <Shell.SearchHandler>
         <control:SearchSingleHandler
             x:Name="searchSingle"
@@ -33,7 +41,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="8">
+                        <StackLayout Padding="8" Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsChecked}" />
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="Medium"

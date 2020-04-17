@@ -10,7 +10,7 @@ namespace Izone.Control
     public class SearchAlbumHandler : SearchHandler
     {
         public static readonly BindableProperty ListAlbumProperty =
-            BindableProperty.Create("ListAlbum", typeof(ObservableCollection<Model.Album>), typeof(SearchAlbumHandler));
+            BindableProperty.Create(nameof(ListAlbum), typeof(ObservableCollection<Model.Album>), typeof(SearchAlbumHandler));
 
         public ObservableCollection<Model.Album> ListAlbum
         {

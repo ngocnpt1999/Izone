@@ -55,5 +55,18 @@ namespace Izone.View
                 ((ListView)sender).SelectedItem = null;
             }
         }
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            var listCheckedSingle = viewModel.ListSingle.Where(x => x.IsChecked == true).ToList();
+            if (listCheckedSingle.Count == 0)
+            {
+                await Navigation.PushAsync(new MediaPage(viewModel.ListSingle.ToList()));
+            }
+            else
+            {
+                await Navigation.PushAsync(new MediaPage(listCheckedSingle));
+            }
+        }
     }
 }

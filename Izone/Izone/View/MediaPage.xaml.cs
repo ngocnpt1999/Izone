@@ -44,6 +44,13 @@ namespace Izone.View
             this.index = index.ToString();
         }
 
+        public MediaPage(List<Model.Single> listSingle)
+        {
+            InitializeComponent();
+            viewModel = new ViewModel.MediaPageViewModel(listSingle);
+            BindingContext = viewModel;
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

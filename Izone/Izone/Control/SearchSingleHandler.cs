@@ -10,10 +10,10 @@ namespace Izone.Control
     public class SearchSingleHandler : SearchHandler
     {
         public static readonly BindableProperty AlbumNameProperty =
-            BindableProperty.Create("AlbumName", typeof(string), typeof(SearchSingleHandler), "");
+            BindableProperty.Create(nameof(AlbumName), typeof(string), typeof(SearchSingleHandler));
 
         public static readonly BindableProperty ListSingleProperty =
-            BindableProperty.Create("ListSingle", typeof(ObservableCollection<Model.Single>), typeof(SearchSingleHandler));
+            BindableProperty.Create(nameof(ListSingle), typeof(ObservableCollection<Model.Single>), typeof(SearchSingleHandler));
 
         public string AlbumName
         {

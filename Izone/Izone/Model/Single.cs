@@ -15,6 +15,8 @@ namespace Izone.Model
         private string mp3Uri;
         private string singleImage;
 
+        private bool isChecked = false;
+
         public int ID
         {
             get => id;
@@ -48,6 +50,16 @@ namespace Izone.Model
             set
             {
                 singleImage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsChecked
+        {
+            get => isChecked;
+            set
+            {
+                isChecked = value;
                 OnPropertyChanged();
             }
         }
