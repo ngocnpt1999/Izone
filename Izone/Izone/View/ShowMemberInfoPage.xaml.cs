@@ -10,17 +10,8 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty("IdMember", "idmember")]
     public partial class ShowMemberInfoPage : ContentPage
     {
-        private string idmember;
-        public string IdMember
-        {
-            get => idmember;
-            set => idmember = Uri.UnescapeDataString(value);
-        }
-
-        private ViewModel.MemberInfoViewModel viewModel;
         private bool token = true;
 
         public ShowMemberInfoPage()
@@ -37,11 +28,6 @@ namespace Izone.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.idmember != null)
-            {
-                viewModel = new ViewModel.MemberInfoViewModel(int.Parse(this.idmember));
-                BindingContext = viewModel.Member;
-            }
             int countImages = (BindingContext as Model.Member).ImagesUri.Length;
             Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>
             {

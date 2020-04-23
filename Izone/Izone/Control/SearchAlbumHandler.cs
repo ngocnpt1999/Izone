@@ -4,6 +4,7 @@ using System.Text;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Izone.Control
 {
@@ -35,7 +36,8 @@ namespace Izone.Control
         {
             base.OnItemSelected(item);
             string albumName = ((Model.Album)item).Name;
-            await Shell.Current.GoToAsync($"listsingle?albumName={albumName}");
+            await Task.Delay(500);
+            await Shell.Current.Navigation.PushAsync(new View.ListSingleInAlbumPage(albumName));
         }
     }
 }

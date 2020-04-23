@@ -30,7 +30,7 @@ namespace Izone.ViewModel
             RefreshCommand = new Command(ExcuteRefreshCommand);
         }
 
-        private async void LoadData()
+        private async void Load()
         {
             await Task.Run(() =>
             {
@@ -57,7 +57,7 @@ namespace Izone.ViewModel
         public void ExcuteRefreshCommand()
         {
             ListAlbum.Clear();
-            LoadData();
+            Load();
         }
 
         void OnPropertyChanged([CallerMemberName]string propertyName = null)

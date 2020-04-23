@@ -11,17 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty("AlbumName", "albumName")]
     public partial class ListSingleInAlbumPage : ContentPage
     {
-        private string albumName;
-        public string AlbumName
-        {
-            get => albumName;
-            set => albumName = Uri.UnescapeDataString(value);
-        }
-
-        private ViewModel.SingleInAlbumViewModel viewModel;
+        private ViewModel.ListSingleInAlbumViewModel viewModel;
 
         public ListSingleInAlbumPage()
         {
@@ -31,17 +23,13 @@ namespace Izone.View
         public ListSingleInAlbumPage(string albumName)
         {
             InitializeComponent();
-            this.albumName = albumName;
+            viewModel = new ViewModel.ListSingleInAlbumViewModel(albumName);
+            BindingContext = viewModel;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.albumName != null)
-            {
-                viewModel = new ViewModel.SingleInAlbumViewModel(this.albumName);
-                BindingContext = viewModel;
-            }
             viewModel.IsRefreshing = true;
         }
 
@@ -51,7 +39,7 @@ namespace Izone.View
             if (single != null)
             {
                 int index = viewModel.ListSingle.IndexOf(single);
-                await Navigation.PushAsync(new MediaPage(this.albumName, index));
+                await Navigation.PushAsync(new View.MediaPage(viewModel.ListSingle.ToList(), index));
                 ((ListView)sender).SelectedItem = null;
             }
         }

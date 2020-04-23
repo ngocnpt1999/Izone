@@ -9,22 +9,14 @@ using System.Runtime.CompilerServices;
 
 namespace Izone.ViewModel
 {
-    public class SingleInAlbumViewModel : INotifyPropertyChanged
+    public class ListSingleInAlbumViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string albumName;
+
         private ObservableCollection<Model.Single> listSingle = new ObservableCollection<Model.Single>();
 
-        public string AlbumName
-        {
-            get => albumName;
-            private set
-            {
-                albumName = value;
-                OnPropertyChanged();
-            }
-        }
         public ObservableCollection<Model.Single> ListSingle
         {
             get => listSingle;
@@ -35,13 +27,13 @@ namespace Izone.ViewModel
             }
         }
 
-        public SingleInAlbumViewModel(string albumName)
+        public ListSingleInAlbumViewModel(string albumName)
         {
             this.albumName = albumName;
             RefreshCommand = new Command(ExcuteRefreshCommand);
         }
 
-        private async void LoadData()
+        private async void Load()
         {
             await Task.Run(() =>
             {
@@ -68,7 +60,7 @@ namespace Izone.ViewModel
         public void ExcuteRefreshCommand()
         {
             ListSingle.Clear();
-            LoadData();
+            Load();
         }
 
         void OnPropertyChanged([CallerMemberName]string propertyName = null)

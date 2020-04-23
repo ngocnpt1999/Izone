@@ -11,23 +11,8 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty("AlbumName", "albumName")]
-    [QueryProperty("Index", "index")]
     public partial class MediaPage : ContentPage
     {
-        private string albumName;
-        private string index;
-        public string AlbumName
-        {
-            get => albumName;
-            set => albumName = Uri.UnescapeDataString(value);
-        }
-        public string Index
-        {
-            get => index;
-            set => index = Uri.UnescapeDataString(value);
-        }
-
         private ViewModel.MediaPageViewModel viewModel;
 
         private bool cancelToken = false;
@@ -37,11 +22,11 @@ namespace Izone.View
             InitializeComponent();
         }
 
-        public MediaPage(string albumName, int index)
+        public MediaPage(List<Model.Single> listSingle, int index)
         {
             InitializeComponent();
-            this.albumName = albumName;
-            this.index = index.ToString();
+            viewModel = new ViewModel.MediaPageViewModel(listSingle, index);
+            BindingContext = viewModel;
         }
 
         public MediaPage(List<Model.Single> listSingle)
@@ -54,11 +39,6 @@ namespace Izone.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.albumName != null && this.index != null)
-            {
-                viewModel = new ViewModel.MediaPageViewModel(this.albumName, int.Parse(this.index));
-                BindingContext = viewModel;
-            }
         }
 
         private async void StartAnimation()
@@ -109,6 +89,12 @@ namespace Izone.View
         private void refreshView_Refreshing(object sender, EventArgs e)
         {
             ffimageCD.Rotation = 0;
+        }
+
+        private void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StopAnimation();
+            viewModel.IsRefreshing = true;
         }
     }
 }

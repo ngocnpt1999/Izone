@@ -19,7 +19,6 @@
     <Shell.SearchHandler>
         <control:SearchSingleHandler
             x:Name="searchSingle"
-            AlbumName="{Binding AlbumName}"
             ListSingle="{Binding ListSingle}"
             Placeholder="..."
             SearchBoxVisibility="Collapsible"

@@ -13,7 +13,6 @@ namespace Izone.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string albumName;
         private ObservableCollection<Model.Single> listSingle = new ObservableCollection<Model.Single>();
         private int selectedSingleIndex = -1;
         private Model.Single selectedSingle;
@@ -46,30 +45,28 @@ namespace Izone.ViewModel
             }
         }
 
-        public MediaPageViewModel(string albumName, int index)
+        public MediaPageViewModel(List<Model.Single> listSingle, int index)
         {
-            LoadListSingle(albumName, index);
+            Load(listSingle, index);
         }
 
         public MediaPageViewModel(List<Model.Single> listSingle)
         {
-            LoadListSingle(listSingle);
+            Load(listSingle);
         }
 
-        private async void LoadListSingle(string albumName, int index)
+        private async void Load(List<Model.Single> listSingle, int index)
         {
             IsRefreshing = true;
             await Task.Run(() =>
             {
-                this.albumName = albumName;
-                var data = Task.Run(async () => await Helper.FirebaseHelper.Instance.GetListSingleByAlbumAsync(this.albumName)).Result;
-                ListSingle = new ObservableCollection<Model.Single>(data);
+                ListSingle = new ObservableCollection<Model.Single>(listSingle);
                 SelectedSingleIndex = index;
                 SelectedSingle = ListSingle[index];
             });
         }
 
-        private async void LoadListSingle(List<Model.Single> listSingle)
+        private async void Load(List<Model.Single> listSingle)
         {
             IsRefreshing = true;
             await Task.Run(() =>

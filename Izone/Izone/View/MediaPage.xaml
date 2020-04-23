@@ -49,6 +49,7 @@
                         ItemDisplayBinding="{Binding Name}"
                         ItemsSource="{Binding ListSingle}"
                         SelectedIndex="{Binding SelectedSingleIndex}"
+                        SelectedIndexChanged="pickerSingle_SelectedIndexChanged"
                         SelectedItem="{Binding SelectedSingle}" />
                     <StackLayout
                         Grid.Row="1"
