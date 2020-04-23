@@ -53,7 +53,7 @@ namespace Izone.View
             }
         }
 
-        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        private async void playIcon_Clicked(object sender, EventArgs e)
         {
             var listCheckedSingle = viewModel.ListSingle.Where(x => x.IsChecked == true).ToList();
             if (listCheckedSingle.Count == 0)

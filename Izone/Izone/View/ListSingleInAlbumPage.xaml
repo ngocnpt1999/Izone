@@ -16,7 +16,7 @@
                 HorizontalOptions="EndAndExpand"
                 Source="play_icon.png">
                 <ffimageloading:CachedImage.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="ToolbarItem_Clicked" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="playIcon_Clicked" />
                 </ffimageloading:CachedImage.GestureRecognizers>
             </ffimageloading:CachedImage>
         </StackLayout>
