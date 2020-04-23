@@ -36,11 +36,6 @@ namespace Izone.View
             BindingContext = viewModel;
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
         private async void StartAnimation()
         {
             cancelToken = false;

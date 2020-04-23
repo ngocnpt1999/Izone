@@ -14,7 +14,6 @@
             x:Name="searchMember"
             ListMember="{Binding ListMember}"
             Placeholder="..."
-            SearchBoxVisibility="Collapsible"
             ShowsResults="True">
             <control:SearchMemberHandler.ItemTemplate>
                 <DataTemplate>

@@ -12,7 +12,7 @@ namespace Izone.Model
 
         private int id;
         private string name;
-        private string mp3Uri;
+        private string mp4Uri;
         private string singleImage;
 
         private bool isChecked = false;
@@ -26,7 +26,7 @@ namespace Izone.Model
                 OnPropertyChanged();
             }
         }
-        public string Name 
+        public string Name
         { 
             get => name;
             set
@@ -35,12 +35,12 @@ namespace Izone.Model
                 OnPropertyChanged();
             }
         }
-        public string Mp3Uri 
+        public string Mp4Uri
         { 
-            get => mp3Uri;
+            get => mp4Uri;
             set
             {
-                mp3Uri = value;
+                mp4Uri = value;
                 OnPropertyChanged();
             }
         }

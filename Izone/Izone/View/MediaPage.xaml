@@ -31,7 +31,7 @@
                     MediaFailed="mediaView_MediaFailed"
                     MediaOpened="mediaView_MediaOpened"
                     ShowsPlaybackControls="True"
-                    Source="{Binding SelectedSingle.Mp3Uri}"
+                    Source="{Binding SelectedSingle.Mp4Uri}"
                     VerticalOptions="Fill" />
                 <Grid>
                     <Grid.ColumnDefinitions>

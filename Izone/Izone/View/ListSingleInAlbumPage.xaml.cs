@@ -30,6 +30,15 @@ namespace Izone.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    searchSingle.SearchBoxVisibility = SearchBoxVisibility.Expanded;
+                    break;
+                case Device.Android:
+                    searchSingle.SearchBoxVisibility = SearchBoxVisibility.Collapsible;
+                    break;
+            }
             viewModel.IsRefreshing = true;
         }
 
