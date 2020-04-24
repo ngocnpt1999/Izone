@@ -24,7 +24,7 @@
                     </ffimageloading:CachedImage.Transformations>
                 </ffimageloading:CachedImage>
                 <MediaElement
-                    x:Name="mediaView"
+                    x:Name="videoView"
                     AutoPlay="True"
                     HeightRequest="110"
                     MediaEnded="mediaView_MediaEnded"

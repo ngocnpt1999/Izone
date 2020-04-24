@@ -22,17 +22,10 @@ namespace Izone.View
             InitializeComponent();
         }
 
-        public MediaPage(List<Model.Single> listSingle, int index)
+        public MediaPage(List<Model.Single> listSingle, int index = 0)
         {
             InitializeComponent();
             viewModel = new ViewModel.MediaPageViewModel(listSingle, index);
-            BindingContext = viewModel;
-        }
-
-        public MediaPage(List<Model.Single> listSingle)
-        {
-            InitializeComponent();
-            viewModel = new ViewModel.MediaPageViewModel(listSingle);
             BindingContext = viewModel;
         }
 
@@ -41,7 +34,7 @@ namespace Izone.View
             cancelToken = false;
             while (!cancelToken)
             {
-                await ffimageCD.RotateTo(360, 10000);
+                await ffimageCD.RotateTo(360, 15000);
                 await ffimageCD.RotateTo(0, 0);
             }
         }

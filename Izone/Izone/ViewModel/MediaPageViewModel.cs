@@ -45,17 +45,12 @@ namespace Izone.ViewModel
             }
         }
 
-        public MediaPageViewModel(List<Model.Single> listSingle, int index)
+        public MediaPageViewModel(List<Model.Single> listSingle, int index = 0)
         {
             Load(listSingle, index);
         }
 
-        public MediaPageViewModel(List<Model.Single> listSingle)
-        {
-            Load(listSingle);
-        }
-
-        private async void Load(List<Model.Single> listSingle, int index)
+        private async void Load(List<Model.Single> listSingle, int index = 0)
         {
             IsRefreshing = true;
             await Task.Run(() =>
@@ -63,17 +58,6 @@ namespace Izone.ViewModel
                 ListSingle = new ObservableCollection<Model.Single>(listSingle);
                 SelectedSingleIndex = index;
                 SelectedSingle = ListSingle[index];
-            });
-        }
-
-        private async void Load(List<Model.Single> listSingle)
-        {
-            IsRefreshing = true;
-            await Task.Run(() =>
-            {
-                ListSingle = new ObservableCollection<Model.Single>(listSingle);
-                SelectedSingleIndex = 0;
-                SelectedSingle = ListSingle[0];
             });
         }
 
