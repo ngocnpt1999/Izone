@@ -13,7 +13,7 @@
         IsRefreshing="{Binding IsRefreshing}"
         Refreshing="refreshView_Refreshing">
         <ScrollView>
-            <StackLayout Padding="10">
+            <StackLayout x:Name="stlayout" Padding="10">
                 <ffimageloading:CachedImage
                     x:Name="ffimageCD"
                     DownsampleToViewSize="True"

@@ -65,12 +65,14 @@ namespace Izone.View
         private void btnPrevious_Clicked(object sender, EventArgs e)
         {
             StopAnimation();
+            videoView.Pause();
             viewModel.PreviousSingle();
         }
 
         private void btnNext_Clicked(object sender, EventArgs e)
         {
             StopAnimation();
+            videoView.Pause();
             viewModel.NextSingle();
         }
 
