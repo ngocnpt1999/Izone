@@ -17,8 +17,6 @@ namespace Izone.View
 
         private bool cancelToken = false;
 
-        private bool isRunning = true;
-
         public MediaPage()
         {
             InitializeComponent();
@@ -35,8 +33,9 @@ namespace Izone.View
         protected async override void OnDisappearing()
         {
             base.OnDisappearing();
-            isRunning = false;
+            MediaManager.CrossMediaManager.Current.StateChanged -= Current_StateChanged;
             await MediaManager.CrossMediaManager.Current.Stop();
+            MediaManager.CrossMediaManager.Current.MediaPlayer = null;
         }
 
         private async void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
@@ -48,7 +47,7 @@ namespace Izone.View
                     viewModel.IsRefreshing = false;
                     break;
                 case MediaManager.Player.MediaPlayerState.Stopped:
-                    if (viewModel.IsRefreshing == false && isRunning)
+                    if (viewModel.IsRefreshing == false)
                     {
                         StopAnimation();
                         await MediaManager.CrossMediaManager.Current.Pause();

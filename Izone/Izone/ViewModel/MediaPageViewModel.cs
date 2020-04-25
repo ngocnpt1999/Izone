@@ -73,6 +73,7 @@ namespace Izone.ViewModel
             {
                 SelectedSingleIndex++;
             }
+            await Task.Delay(500);
             await MediaManager.CrossMediaManager.Current.Play(SelectedSingle.Mp4Uri);
         }
 
@@ -87,12 +88,14 @@ namespace Izone.ViewModel
             {
                 SelectedSingleIndex--;
             }
+            await Task.Delay(500);
             await MediaManager.CrossMediaManager.Current.Play(SelectedSingle.Mp4Uri);
         }
 
         public async void PlaySelectedSingle()
         {
             IsRefreshing = true;
+            await Task.Delay(500);
             await MediaManager.CrossMediaManager.Current.Play(SelectedSingle.Mp4Uri);
         }
 
