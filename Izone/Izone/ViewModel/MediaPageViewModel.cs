@@ -58,10 +58,11 @@ namespace Izone.ViewModel
                 ListSingle = new ObservableCollection<Model.Single>(listSingle);
                 SelectedSingleIndex = index;
                 SelectedSingle = ListSingle[index];
+                MediaManager.CrossMediaManager.Current.Play(SelectedSingle.Mp4Uri);
             });
         }
 
-        public void NextSingle()
+        public async void PlayNextSingle()
         {
             IsRefreshing = true;
             if (SelectedSingleIndex == ListSingle.Count - 1)
@@ -72,9 +73,10 @@ namespace Izone.ViewModel
             {
                 SelectedSingleIndex++;
             }
+            await MediaManager.CrossMediaManager.Current.Play(SelectedSingle.Mp4Uri);
         }
 
-        public void PreviousSingle()
+        public async void PlayPreviousSingle()
         {
             IsRefreshing = true;
             if (SelectedSingleIndex == 0)
@@ -85,6 +87,13 @@ namespace Izone.ViewModel
             {
                 SelectedSingleIndex--;
             }
+            await MediaManager.CrossMediaManager.Current.Play(SelectedSingle.Mp4Uri);
+        }
+
+        public async void PlaySelectedSingle()
+        {
+            IsRefreshing = true;
+            await MediaManager.CrossMediaManager.Current.Play(SelectedSingle.Mp4Uri);
         }
 
         //

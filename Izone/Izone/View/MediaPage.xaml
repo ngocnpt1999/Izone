@@ -7,6 +7,7 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffimagetransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mediamanager="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
     mc:Ignorable="d">
     <RefreshView
         x:Name="refreshView"
@@ -23,16 +24,12 @@
                         <ffimagetransformation:CircleTransformation />
                     </ffimageloading:CachedImage.Transformations>
                 </ffimageloading:CachedImage>
-                <MediaElement
+                <mediamanager:VideoView
                     x:Name="videoView"
-                    AutoPlay="True"
-                    HeightRequest="110"
-                    MediaEnded="mediaView_MediaEnded"
-                    MediaFailed="mediaView_MediaFailed"
-                    MediaOpened="mediaView_MediaOpened"
-                    ShowsPlaybackControls="True"
-                    Source="{Binding SelectedSingle.Mp4Uri}"
-                    VerticalOptions="Fill" />
+                    HeightRequest="120"
+                    ShowControls="True"
+                    VerticalOptions="Fill"
+                    VideoAspect="AspectFit" />
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

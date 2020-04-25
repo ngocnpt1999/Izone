@@ -23,6 +23,7 @@ namespace Izone.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            MediaManager.CrossMediaManager.Current.Init();
 
             global::Xamarin.Forms.Forms.Init();
 

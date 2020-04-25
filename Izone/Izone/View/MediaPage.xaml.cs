@@ -17,6 +17,8 @@ namespace Izone.View
 
         private bool cancelToken = false;
 
+        private bool isRunning = true;
+
         public MediaPage()
         {
             InitializeComponent();
@@ -27,6 +29,33 @@ namespace Izone.View
             InitializeComponent();
             viewModel = new ViewModel.MediaPageViewModel(listSingle, index);
             BindingContext = viewModel;
+            MediaManager.CrossMediaManager.Current.StateChanged += Current_StateChanged;
+        }
+
+        protected async override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            isRunning = false;
+            await MediaManager.CrossMediaManager.Current.Stop();
+        }
+
+        private async void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
+        {
+            switch (e.State)
+            {
+                case MediaManager.Player.MediaPlayerState.Playing:
+                    StartAnimation();
+                    viewModel.IsRefreshing = false;
+                    break;
+                case MediaManager.Player.MediaPlayerState.Stopped:
+                    if (viewModel.IsRefreshing == false && isRunning)
+                    {
+                        StopAnimation();
+                        await MediaManager.CrossMediaManager.Current.Pause();
+                        viewModel.PlayNextSingle();
+                    }
+                    break;
+            }
         }
 
         private async void StartAnimation()
@@ -45,35 +74,28 @@ namespace Izone.View
             ViewExtensions.CancelAnimations(ffimageCD);
         }
 
-        private void mediaView_MediaOpened(object sender, EventArgs e)
+        private async void btnPrevious_Clicked(object sender, EventArgs e)
         {
-            viewModel.IsRefreshing = false;
-            StartAnimation();
-        }
+            if (viewModel.IsRefreshing)
+            {
+                return;
+            }
 
-        private void mediaView_MediaEnded(object sender, EventArgs e)
-        {
-            viewModel.NextSingle();
             StopAnimation();
+            await MediaManager.CrossMediaManager.Current.Pause();
+            viewModel.PlayPreviousSingle();
         }
 
-        private void mediaView_MediaFailed(object sender, EventArgs e)
+        private async void btnNext_Clicked(object sender, EventArgs e)
         {
-            viewModel.IsRefreshing = false;
-        }
+            if (viewModel.IsRefreshing)
+            {
+                return;
+            }
 
-        private void btnPrevious_Clicked(object sender, EventArgs e)
-        {
             StopAnimation();
-            videoView.Pause();
-            viewModel.PreviousSingle();
-        }
-
-        private void btnNext_Clicked(object sender, EventArgs e)
-        {
-            StopAnimation();
-            videoView.Pause();
-            viewModel.NextSingle();
+            await MediaManager.CrossMediaManager.Current.Pause();
+            viewModel.PlayNextSingle();
         }
 
         private void refreshView_Refreshing(object sender, EventArgs e)
@@ -81,10 +103,11 @@ namespace Izone.View
             ffimageCD.Rotation = 0;
         }
 
-        private void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)
+        private async void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)
         {
             StopAnimation();
-            viewModel.IsRefreshing = true;
+            await MediaManager.CrossMediaManager.Current.Pause();
+            viewModel.PlaySelectedSingle();
         }
     }
 }
