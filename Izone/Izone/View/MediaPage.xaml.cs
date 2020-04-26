@@ -35,7 +35,10 @@ namespace Izone.View
             base.OnDisappearing();
             MediaManager.CrossMediaManager.Current.StateChanged -= Current_StateChanged;
             await MediaManager.CrossMediaManager.Current.Stop();
-            MediaManager.CrossMediaManager.Current.MediaPlayer = null;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                MediaManager.CrossMediaManager.Current.MediaPlayer = null;
+            }
         }
 
         private async void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
