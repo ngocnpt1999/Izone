@@ -132,6 +132,10 @@
   <ItemGroup>
     <Content Include="Assets\cd.png" />
     <Content Include="Assets\file.jpg" />
+    <Content Include="Assets\icons8_plus_512.png" />
+    <Content Include="Assets\izone_ver2_2400x1600.jpg" />
+    <Content Include="Assets\izone_ver3_2200x1500.jpg" />
+    <Content Include="Assets\izone_ver3_2400x1800.jpg" />
     <Content Include="Assets\play_icon.png" />
     <Content Include="Assets\user.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -179,7 +183,7 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.5.0.657</Version>
+      <Version>4.6.0.726</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

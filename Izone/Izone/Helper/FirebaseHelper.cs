@@ -52,6 +52,7 @@ namespace Izone.Helper
             {
                 ID = x.Object.ID,
                 Name = x.Object.Name,
+                Mp3Uri = x.Object.Mp3Uri,
                 Mp4Uri = x.Object.Mp4Uri,
                 SingleImage = x.Object.SingleImage
             }).OrderBy(x => x.ID);

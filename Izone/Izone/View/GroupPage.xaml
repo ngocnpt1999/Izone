@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Izone.View.GroupPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Group"
+    mc:Ignorable="d">
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView>
+            <StackLayout>
+                <CarouselView
+                    HeightRequest="210"
+                    IndicatorView="indicatorView"
+                    ItemsSource="{Binding Image}"
+                    VerticalOptions="Fill">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <ffimageloading:CachedImage Aspect="AspectFill" Source="{Binding .}" />
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView
+                    x:Name="indicatorView"
+                    HorizontalOptions="Center"
+                    IndicatorColor="LightGray"
+                    SelectedIndicatorColor="DarkGray" />
+                <BoxView BackgroundColor="LightGray" HeightRequest="20" />
+                <StackLayout Padding="8" Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Thành viên" />
+                    <Label
+                        HorizontalOptions="EndAndExpand"
+                        Text="Xem tất cả &gt;"
+                        TextColor="Blue"
+                        TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SeeAllMember_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="210" />
+                    </Grid.RowDefinitions>
+                    <CollectionView
+                        x:Name="collectionMember"
+                        ItemsSource="{Binding ListMember}"
+                        SelectionChanged="collectionMember_SelectionChanged"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <ContentView>
+                                    <Frame
+                                        Margin="5"
+                                        Padding="8"
+                                        BorderColor="Gray"
+                                        CornerRadius="10"
+                                        HasShadow="True">
+                                        <StackLayout>
+                                            <ffimageloading:CachedImage
+                                                Aspect="AspectFill"
+                                                HeightRequest="150"
+                                                Source="{Binding Avatar}"
+                                                WidthRequest="150" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding NickName}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </ContentView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                <BoxView BackgroundColor="LightGray" HeightRequest="20" />
+                <StackLayout Padding="8" Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Album" />
+                    <Label
+                        HorizontalOptions="EndAndExpand"
+                        Text="Xem tất cả &gt;"
+                        TextColor="Blue"
+                        TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SeeAllAlbum_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="210" />
+                    </Grid.RowDefinitions>
+                    <CollectionView
+                        x:Name="collectionAlbum"
+                        ItemsSource="{Binding ListAlbum}"
+                        SelectionChanged="collectionAlbum_SelectionChanged"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <ContentView>
+                                    <Frame
+                                        Margin="5"
+                                        Padding="8"
+                                        BorderColor="Gray"
+                                        CornerRadius="10"
+                                        HasShadow="True">
+                                        <StackLayout>
+                                            <ffimageloading:CachedImage
+                                                Aspect="AspectFill"
+                                                HeightRequest="150"
+                                                Source="{Binding ImageUri}"
+                                                WidthRequest="150" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding Name}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </ContentView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

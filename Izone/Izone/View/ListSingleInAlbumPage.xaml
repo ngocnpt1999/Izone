@@ -26,6 +26,7 @@
             x:Name="searchSingle"
             ListSingle="{Binding ListSingle}"
             Placeholder="..."
+            SearchBoxVisibility="{StaticResource searchVisibility}"
             ShowsResults="True">
             <control:SearchSingleHandler.ItemTemplate>
                 <DataTemplate>

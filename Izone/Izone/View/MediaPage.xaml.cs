@@ -15,7 +15,7 @@ namespace Izone.View
     {
         private ViewModel.MediaPageViewModel viewModel;
 
-        private bool cancelToken = false;
+        private bool cancelToken = true;
 
         public MediaPage()
         {
@@ -39,6 +39,10 @@ namespace Izone.View
             {
                 MediaManager.CrossMediaManager.Current.MediaPlayer = null;
             }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                MediaManager.CrossMediaManager.Current.MediaPlayer.VideoView = null;
+            }
         }
 
         private async void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
@@ -46,8 +50,11 @@ namespace Izone.View
             switch (e.State)
             {
                 case MediaManager.Player.MediaPlayerState.Playing:
-                    StartAnimation();
-                    viewModel.IsRefreshing = false;
+                    if (cancelToken)
+                    {
+                        StartAnimation();
+                        viewModel.IsRefreshing = false;
+                    }
                     break;
                 case MediaManager.Player.MediaPlayerState.Stopped:
                     if (viewModel.IsRefreshing == false)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -6,6 +7,8 @@ namespace Izone
 {
     public partial class App : Application
     {
+        public static double frameHeight = (DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density) / 2 + 35;
+
         public App()
         {
             InitializeComponent();

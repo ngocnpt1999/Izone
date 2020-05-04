@@ -12,6 +12,7 @@ namespace Izone.Model
 
         private int id;
         private string name;
+        private string mp3Uri;
         private string mp4Uri;
         private string singleImage;
 
@@ -32,6 +33,15 @@ namespace Izone.Model
             set
             {
                 name = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Mp3Uri
+        {
+            get => mp3Uri;
+            set
+            {
+                mp3Uri = value;
                 OnPropertyChanged();
             }
         }

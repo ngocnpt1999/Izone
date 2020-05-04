@@ -12,6 +12,9 @@
             <Image Aspect="AspectFit" Source="file.jpg" />
         </ContentView>
     </Shell.FlyoutHeader>
+    <FlyoutItem Title="Group">
+        <views:GroupPage />
+    </FlyoutItem>
     <FlyoutItem Title="Danh sách thành viên" Icon="user.png">
         <views:ListMemberPage />
     </FlyoutItem>

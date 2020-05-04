@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace Izone.View
 {
@@ -25,15 +26,6 @@ namespace Izone.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                    searchMember.SearchBoxVisibility = SearchBoxVisibility.Expanded;
-                    break;
-                case Device.Android:
-                    searchMember.SearchBoxVisibility = SearchBoxVisibility.Collapsible;
-                    break;
-            }
             viewModel.IsRefreshing = true;
         }
 

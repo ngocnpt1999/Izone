@@ -141,7 +141,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.657" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -162,5 +162,17 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\izone_ver2_2400x1600.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\izone_ver3_2200x1500.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\izone_ver3_2400x1800.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icons8_plus_512.png" />
   </ItemGroup>
 </Project>
