@@ -7,13 +7,18 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:option="clr-namespace:Izone.Helper"
     Title="{Binding Name}"
     mc:Ignorable="d">
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
+            <Switch
+                x:Name="switchMediaMode"
+                HorizontalOptions="EndAndExpand"
+                IsToggled="{Binding Source={x:Static option:Option.Current}, Path=Mp4Mode, Mode=TwoWay}" />
             <ffimageloading:CachedImage
                 Aspect="AspectFit"
-                HorizontalOptions="EndAndExpand"
+                HorizontalOptions="End"
                 Source="play_icon.png">
                 <ffimageloading:CachedImage.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="playIcon_Clicked" />
