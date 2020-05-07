@@ -12,7 +12,7 @@ namespace Izone.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShowMemberInfoPage : ContentPage
     {
-        private bool token = true;
+        private bool token;
 
         public ShowMemberInfoPage()
         {
@@ -28,9 +28,10 @@ namespace Izone.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            int countImages = (BindingContext as Model.Member).ImagesUri.Length;
+            token = true;
             Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>
             {
+                int countImages = (BindingContext as Model.Member).ImagesUri.Length;
                 carouselView.Position = (carouselView.Position + 1) % countImages;
                 return token;
             }));

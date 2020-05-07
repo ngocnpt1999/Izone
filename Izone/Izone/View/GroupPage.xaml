@@ -12,13 +12,14 @@
         <ScrollView>
             <StackLayout>
                 <CarouselView
+                    x:Name="carouselView"
                     HeightRequest="210"
                     IndicatorView="indicatorView"
                     ItemsSource="{Binding Image}"
                     VerticalOptions="Fill">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
-                            <ffimageloading:CachedImage Aspect="AspectFill" Source="{Binding .}" />
+                            <ffimageloading:CachedImage Aspect="AspectFit" Source="{Binding .}" />
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>

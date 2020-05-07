@@ -14,6 +14,8 @@ namespace Izone.View
     {
         private ViewModel.GroupViewModel viewModel;
 
+        private bool token;
+
         public GroupPage()
         {
             InitializeComponent();
@@ -24,7 +26,24 @@ namespace Izone.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            token = true;
+            Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>
+            {
+                if (viewModel.IsRefreshing)
+                {
+                    return true;
+                }
+                int countImages = viewModel.Image.Length;
+                carouselView.Position = (carouselView.Position + 1) % countImages;
+                return token;
+            }));
             viewModel.IsRefreshing = true;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            token = false;
         }
 
         private async void SeeAllMember_Tapped(object sender, EventArgs e)
