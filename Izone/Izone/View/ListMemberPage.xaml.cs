@@ -34,7 +34,7 @@ namespace Izone.View
             var member = ((CollectionView)sender).SelectedItem as Model.Member;
             if (member != null)
             {
-                await Navigation.PushAsync(new View.ShowMemberInfoPage(member));
+                await Navigation.PushAsync(new View.MemberInfoPage(member.ID));
                 ((CollectionView)sender).SelectedItem = null;
             }
         }

@@ -10,19 +10,22 @@ using Xamarin.Forms.Xaml;
 namespace Izone.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ShowMemberInfoPage : ContentPage
+    public partial class MemberInfoPage : ContentPage
     {
         private bool token;
 
-        public ShowMemberInfoPage()
+        private ViewModel.MemberInfoViewModel viewModel;
+
+        public MemberInfoPage()
         {
             InitializeComponent();
         }
 
-        public ShowMemberInfoPage(Model.Member member)
+        public MemberInfoPage(int idMember)
         {
             InitializeComponent();
-            BindingContext = member;
+            viewModel = new ViewModel.MemberInfoViewModel(idMember);
+            BindingContext = viewModel;
         }
 
         protected override void OnAppearing()
@@ -31,10 +34,15 @@ namespace Izone.View
             token = true;
             Device.StartTimer(TimeSpan.FromSeconds(6), (Func<bool>)(() =>
             {
-                int countImages = (BindingContext as Model.Member).ImagesUri.Length;
+                if (viewModel.IsRefreshing)
+                {
+                    return true;
+                }
+                int countImages = viewModel.Member.ImagesUri.Length;
                 carouselView.Position = (carouselView.Position + 1) % countImages;
                 return token;
             }));
+            viewModel.IsRefreshing = true;
         }
 
         protected override void OnDisappearing()

@@ -70,7 +70,7 @@ namespace Izone.View
             }
             else
             {
-                await Navigation.PushAsync(new View.ShowMemberInfoPage(member));
+                await Navigation.PushAsync(new View.MemberInfoPage(member.ID));
             }
             collectionMember.SelectedItem = null;
         }

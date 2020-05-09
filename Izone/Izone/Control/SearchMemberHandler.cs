@@ -37,7 +37,7 @@ namespace Izone.Control
         {
             base.OnItemSelected(item);
             await Task.Delay(500);
-            await Shell.Current.Navigation.PushAsync(new View.ShowMemberInfoPage((Model.Member)item));
+            await Shell.Current.Navigation.PushAsync(new View.MemberInfoPage(((Model.Member)item).ID));
         }
     }
 }
