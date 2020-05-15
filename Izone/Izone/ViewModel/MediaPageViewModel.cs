@@ -75,7 +75,7 @@ namespace Izone.ViewModel
             }
         }
 
-        public void PlayNextSingle()
+        public async void PlayNextSingle()
         {
             IsRefreshing = true;
             if (SelectedSingleIndex == ListSingle.Count - 1)
@@ -86,10 +86,11 @@ namespace Izone.ViewModel
             {
                 SelectedSingleIndex++;
             }
+            await MediaManager.CrossMediaManager.Current.Stop();
             Play();
         }
 
-        public void PlayPreviousSingle()
+        public async void PlayPreviousSingle()
         {
             IsRefreshing = true;
             if (SelectedSingleIndex == 0)
@@ -100,12 +101,14 @@ namespace Izone.ViewModel
             {
                 SelectedSingleIndex--;
             }
+            await MediaManager.CrossMediaManager.Current.Stop();
             Play();
         }
 
-        public void PlaySelectedSingle()
+        public async void PlaySelectedSingle()
         {
             IsRefreshing = true;
+            await MediaManager.CrossMediaManager.Current.Stop();
             Play();
         }
 

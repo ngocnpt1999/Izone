@@ -45,7 +45,7 @@ namespace Izone.View
             }
         }
 
-        private async void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
+        private void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
         {
             switch (e.State)
             {
@@ -60,7 +60,6 @@ namespace Izone.View
                     if (viewModel.IsRefreshing == false)
                     {
                         StopAnimation();
-                        await MediaManager.CrossMediaManager.Current.Pause();
                         viewModel.PlayNextSingle();
                     }
                     break;
@@ -83,7 +82,7 @@ namespace Izone.View
             ViewExtensions.CancelAnimations(ffimageCD);
         }
 
-        private async void btnPrevious_Clicked(object sender, EventArgs e)
+        private void btnPrevious_Clicked(object sender, EventArgs e)
         {
             if (viewModel.IsRefreshing)
             {
@@ -91,11 +90,10 @@ namespace Izone.View
             }
 
             StopAnimation();
-            await MediaManager.CrossMediaManager.Current.Pause();
             viewModel.PlayPreviousSingle();
         }
 
-        private async void btnNext_Clicked(object sender, EventArgs e)
+        private void btnNext_Clicked(object sender, EventArgs e)
         {
             if (viewModel.IsRefreshing)
             {
@@ -103,7 +101,6 @@ namespace Izone.View
             }
 
             StopAnimation();
-            await MediaManager.CrossMediaManager.Current.Pause();
             viewModel.PlayNextSingle();
         }
 
@@ -112,10 +109,9 @@ namespace Izone.View
             ffimageCD.Rotation = 0;
         }
 
-        private async void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)
+        private void pickerSingle_SelectedIndexChanged(object sender, EventArgs e)
         {
             StopAnimation();
-            await MediaManager.CrossMediaManager.Current.Pause();
             viewModel.PlaySelectedSingle();
         }
     }
